@@ -1,0 +1,1107 @@
+{
+  "{\"filename\":\"/Users/swest1/apps/sandbox/universal-webpack-react/webpack.config.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],{\"async\":false,\"asyncGenerators\":false}]],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false}:6.4.5": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/Users/swest1/apps/sandbox/universal-webpack-react/webpack.config.js",
+      "filenameRelative": "/Users/swest1/apps/sandbox/universal-webpack-react/webpack.config.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          {
+            "async": false,
+            "asyncGenerators": false
+          }
+        ]
+      ],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMap": "both",
+      "sourceMaps": "both",
+      "sourceMapTarget": "webpack.config.js",
+      "sourceFileName": "webpack.config.js",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleIds": false,
+      "basename": "webpack.config"
+    },
+    "ignored": false,
+    "code": "'use strict';\n\nvar path = require('path');\nvar qs = require('querystring');\nvar webpack = require('webpack');\nvar ExtractTextPlugin = require('extract-text-webpack-plugin');\n\nprocess.env.NODE_ENV = process.env.NODE_ENV || \"development\";\n\nmodule.exports = {\n  devtool: '#eval-source-map',\n  entry: ['webpack-hot-middleware/client', './client/main.js'],\n  output: {\n    path: __dirname,\n    filename: 'bundle.js',\n    publicPath: '/'\n  },\n  plugins: [new webpack.optimize.OccurenceOrderPlugin(), new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin()\n  //new ExtractTextPlugin('main.css')\n  ],\n  resolve: {\n    extensions: ['', '.js'],\n    alias: {\n      request: 'browser-request'\n    }\n  },\n  module: {\n    loaders: [{\n      test: /\\.scss$/,\n      //loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),\n      loaders: ['style-loader', 'css-loader', 'sass-loader'],\n      include: path.join(__dirname, 'client', 'sass')\n    }, {\n      test: /\\.js$/,\n      loader: 'babel',\n      include: path.join(__dirname, 'client'),\n      query: {\n        \"env\": {\n          \"development\": {\n            \"presets\": [\"react-hmre\", \"stage-0\"],\n            \"plugins\": [[\"react-transform\", {\n              \"transforms\": [{\n                \"transform\": \"react-transform-hmr\",\n                \"imports\": [\"react\"],\n                \"locals\": [\"module\"]\n              }]\n            }]]\n          }\n        }\n      }\n    }\n    /*\n    // CSS\n    {\n      test: /\\.css$/,\n      include: path.join(__dirname, 'client'),\n      loader: 'style-loader!css-loader?' + qs.stringify({\n        modules: true,\n        importLoaders: 1,\n        localIdentName: '[path][name]-[local]'\n      })\n    }\n    */\n\n    ]\n  }\n};\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2suY29uZmlnLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsSUFBSSxPQUFPLFFBQVEsTUFBUixDQUFQO0FBQ0osSUFBSSxLQUFLLFFBQVEsYUFBUixDQUFMO0FBQ0osSUFBSSxVQUFVLFFBQVEsU0FBUixDQUFWO0FBQ0osSUFBSSxvQkFBb0IsUUFBUSw2QkFBUixDQUFwQjs7QUFFSixRQUFRLEdBQVIsQ0FBWSxRQUFaLEdBQXVCLFFBQVEsR0FBUixDQUFZLFFBQVosSUFBd0IsYUFBeEI7O0FBRXZCLE9BQU8sT0FBUCxHQUFpQjtBQUNmLFdBQVMsa0JBQVQ7QUFDQSxTQUFPLENBQ0wsK0JBREssRUFFTCxrQkFGSyxDQUFQO0FBSUEsVUFBUTtBQUNOLFVBQU0sU0FBTjtBQUNBLGNBQVUsV0FBVjtBQUNBLGdCQUFZLEdBQVo7R0FIRjtBQUtBLFdBQVMsQ0FDUCxJQUFJLFFBQVEsUUFBUixDQUFpQixvQkFBakIsRUFERyxFQUVQLElBQUksUUFBUSwwQkFBUixFQUZHLEVBR1AsSUFBSSxRQUFRLGNBQVI7O0FBSEcsR0FBVDtBQU1BLFdBQVM7QUFDUCxnQkFBWSxDQUFDLEVBQUQsRUFBSyxLQUFMLENBQVo7QUFDQSxXQUFPO0FBQ0wsZUFBUyxpQkFBVDtLQURGO0dBRkY7QUFNQSxVQUFRO0FBQ04sYUFBUyxDQUNQO0FBQ0UsWUFBTSxTQUFOOztBQUVBLGVBQVMsQ0FBQyxjQUFELEVBQWlCLFlBQWpCLEVBQStCLGFBQS9CLENBQVQ7QUFDQSxlQUFTLEtBQUssSUFBTCxDQUFVLFNBQVYsRUFBcUIsUUFBckIsRUFBK0IsTUFBL0IsQ0FBVDtLQUxLLEVBT1A7QUFDRSxZQUFNLE9BQU47QUFDQSxjQUFRLE9BQVI7QUFDQSxlQUFTLEtBQUssSUFBTCxDQUFVLFNBQVYsRUFBcUIsUUFBckIsQ0FBVDtBQUNBLGFBQU87QUFDTCxlQUFPO0FBQ0wseUJBQWU7QUFDYix1QkFBVyxDQUFDLFlBQUQsRUFBZSxTQUFmLENBQVg7QUFDQSx1QkFBVyxDQUNULENBQUMsaUJBQUQsRUFBb0I7QUFDbEIsNEJBQWMsQ0FBQztBQUNiLDZCQUFhLHFCQUFiO0FBQ0EsMkJBQVcsQ0FBQyxPQUFELENBQVg7QUFDQSwwQkFBVSxDQUFDLFFBQUQsQ0FBVjtlQUhZLENBQWQ7YUFERixDQURTLENBQVg7V0FGRjtTQURGO09BREY7Ozs7Ozs7Ozs7Ozs7OztBQVhLLEtBQVQ7R0FERjtDQXZCRiIsImZpbGUiOiJ3ZWJwYWNrLmNvbmZpZy5qcyIsInNvdXJjZXNDb250ZW50IjpbInZhciBwYXRoID0gcmVxdWlyZSgncGF0aCcpO1xudmFyIHFzID0gcmVxdWlyZSgncXVlcnlzdHJpbmcnKTtcbnZhciB3ZWJwYWNrID0gcmVxdWlyZSgnd2VicGFjaycpO1xudmFyIEV4dHJhY3RUZXh0UGx1Z2luID0gcmVxdWlyZSgnZXh0cmFjdC10ZXh0LXdlYnBhY2stcGx1Z2luJyk7XG5cbnByb2Nlc3MuZW52Lk5PREVfRU5WID0gcHJvY2Vzcy5lbnYuTk9ERV9FTlYgfHwgXCJkZXZlbG9wbWVudFwiO1xuXG5tb2R1bGUuZXhwb3J0cyA9IHtcbiAgZGV2dG9vbDogJyNldmFsLXNvdXJjZS1tYXAnLFxuICBlbnRyeTogW1xuICAgICd3ZWJwYWNrLWhvdC1taWRkbGV3YXJlL2NsaWVudCcsXG4gICAgJy4vY2xpZW50L21haW4uanMnXG4gIF0sXG4gIG91dHB1dDoge1xuICAgIHBhdGg6IF9fZGlybmFtZSxcbiAgICBmaWxlbmFtZTogJ2J1bmRsZS5qcycsXG4gICAgcHVibGljUGF0aDogJy8nXG4gIH0sXG4gIHBsdWdpbnM6IFtcbiAgICBuZXcgd2VicGFjay5vcHRpbWl6ZS5PY2N1cmVuY2VPcmRlclBsdWdpbigpLFxuICAgIG5ldyB3ZWJwYWNrLkhvdE1vZHVsZVJlcGxhY2VtZW50UGx1Z2luKCksXG4gICAgbmV3IHdlYnBhY2suTm9FcnJvcnNQbHVnaW4oKVxuICAgIC8vbmV3IEV4dHJhY3RUZXh0UGx1Z2luKCdtYWluLmNzcycpXG4gIF0sXG4gIHJlc29sdmU6IHtcbiAgICBleHRlbnNpb25zOiBbJycsICcuanMnXSxcbiAgICBhbGlhczoge1xuICAgICAgcmVxdWVzdDogJ2Jyb3dzZXItcmVxdWVzdCdcbiAgICB9XG4gIH0sXG4gIG1vZHVsZToge1xuICAgIGxvYWRlcnM6IFtcbiAgICAgIHtcbiAgICAgICAgdGVzdDogL1xcLnNjc3MkLyxcbiAgICAgICAgLy9sb2FkZXI6IEV4dHJhY3RUZXh0UGx1Z2luLmV4dHJhY3QoJ3N0eWxlLWxvYWRlcicsICdjc3MtbG9hZGVyIXNhc3MtbG9hZGVyJyksXG4gICAgICAgIGxvYWRlcnM6IFsnc3R5bGUtbG9hZGVyJywgJ2Nzcy1sb2FkZXInLCAnc2Fzcy1sb2FkZXInXSxcbiAgICAgICAgaW5jbHVkZTogcGF0aC5qb2luKF9fZGlybmFtZSwgJ2NsaWVudCcsICdzYXNzJylcbiAgICAgIH0sXG4gICAgICB7XG4gICAgICAgIHRlc3Q6IC9cXC5qcyQvLFxuICAgICAgICBsb2FkZXI6ICdiYWJlbCcsXG4gICAgICAgIGluY2x1ZGU6IHBhdGguam9pbihfX2Rpcm5hbWUsICdjbGllbnQnKSxcbiAgICAgICAgcXVlcnk6IHtcbiAgICAgICAgICBcImVudlwiOiB7XG4gICAgICAgICAgICBcImRldmVsb3BtZW50XCI6IHtcbiAgICAgICAgICAgICAgXCJwcmVzZXRzXCI6IFtcInJlYWN0LWhtcmVcIiwgXCJzdGFnZS0wXCJdLFxuICAgICAgICAgICAgICBcInBsdWdpbnNcIjogW1xuICAgICAgICAgICAgICAgIFtcInJlYWN0LXRyYW5zZm9ybVwiLCB7XG4gICAgICAgICAgICAgICAgICBcInRyYW5zZm9ybXNcIjogW3tcbiAgICAgICAgICAgICAgICAgICAgXCJ0cmFuc2Zvcm1cIjogXCJyZWFjdC10cmFuc2Zvcm0taG1yXCIsXG4gICAgICAgICAgICAgICAgICAgIFwiaW1wb3J0c1wiOiBbXCJyZWFjdFwiXSxcbiAgICAgICAgICAgICAgICAgICAgXCJsb2NhbHNcIjogW1wibW9kdWxlXCJdXG4gICAgICAgICAgICAgICAgICB9XVxuICAgICAgICAgICAgICAgIH1dXG4gICAgICAgICAgICAgIF1cbiAgICAgICAgICAgIH1cbiAgICAgICAgICB9LFxuICAgICAgICB9XG4gICAgICB9XG4gICAgICAvKlxuICAgICAgLy8gQ1NTXG4gICAgICB7XG4gICAgICAgIHRlc3Q6IC9cXC5jc3MkLyxcbiAgICAgICAgaW5jbHVkZTogcGF0aC5qb2luKF9fZGlybmFtZSwgJ2NsaWVudCcpLFxuICAgICAgICBsb2FkZXI6ICdzdHlsZS1sb2FkZXIhY3NzLWxvYWRlcj8nICsgcXMuc3RyaW5naWZ5KHtcbiAgICAgICAgICBtb2R1bGVzOiB0cnVlLFxuICAgICAgICAgIGltcG9ydExvYWRlcnM6IDEsXG4gICAgICAgICAgbG9jYWxJZGVudE5hbWU6ICdbcGF0aF1bbmFtZV0tW2xvY2FsXSdcbiAgICAgICAgfSlcbiAgICAgIH1cbiAgICAgICovXG5cbiAgICBdXG4gIH1cbn07XG4iXX0=",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "webpack.config.js"
+      ],
+      "names": [],
+      "mappings": ";;AAAA,IAAI,OAAO,QAAQ,MAAR,CAAP;AACJ,IAAI,KAAK,QAAQ,aAAR,CAAL;AACJ,IAAI,UAAU,QAAQ,SAAR,CAAV;AACJ,IAAI,oBAAoB,QAAQ,6BAAR,CAApB;;AAEJ,QAAQ,GAAR,CAAY,QAAZ,GAAuB,QAAQ,GAAR,CAAY,QAAZ,IAAwB,aAAxB;;AAEvB,OAAO,OAAP,GAAiB;AACf,WAAS,kBAAT;AACA,SAAO,CACL,+BADK,EAEL,kBAFK,CAAP;AAIA,UAAQ;AACN,UAAM,SAAN;AACA,cAAU,WAAV;AACA,gBAAY,GAAZ;GAHF;AAKA,WAAS,CACP,IAAI,QAAQ,QAAR,CAAiB,oBAAjB,EADG,EAEP,IAAI,QAAQ,0BAAR,EAFG,EAGP,IAAI,QAAQ,cAAR;;AAHG,GAAT;AAMA,WAAS;AACP,gBAAY,CAAC,EAAD,EAAK,KAAL,CAAZ;AACA,WAAO;AACL,eAAS,iBAAT;KADF;GAFF;AAMA,UAAQ;AACN,aAAS,CACP;AACE,YAAM,SAAN;;AAEA,eAAS,CAAC,cAAD,EAAiB,YAAjB,EAA+B,aAA/B,CAAT;AACA,eAAS,KAAK,IAAL,CAAU,SAAV,EAAqB,QAArB,EAA+B,MAA/B,CAAT;KALK,EAOP;AACE,YAAM,OAAN;AACA,cAAQ,OAAR;AACA,eAAS,KAAK,IAAL,CAAU,SAAV,EAAqB,QAArB,CAAT;AACA,aAAO;AACL,eAAO;AACL,yBAAe;AACb,uBAAW,CAAC,YAAD,EAAe,SAAf,CAAX;AACA,uBAAW,CACT,CAAC,iBAAD,EAAoB;AAClB,4BAAc,CAAC;AACb,6BAAa,qBAAb;AACA,2BAAW,CAAC,OAAD,CAAX;AACA,0BAAU,CAAC,QAAD,CAAV;eAHY,CAAd;aADF,CADS,CAAX;WAFF;SADF;OADF;;;;;;;;;;;;;;;AAXK,KAAT;GADF;CAvBF",
+      "file": "webpack.config.js",
+      "sourcesContent": [
+        "var path = require('path');\nvar qs = require('querystring');\nvar webpack = require('webpack');\nvar ExtractTextPlugin = require('extract-text-webpack-plugin');\n\nprocess.env.NODE_ENV = process.env.NODE_ENV || \"development\";\n\nmodule.exports = {\n  devtool: '#eval-source-map',\n  entry: [\n    'webpack-hot-middleware/client',\n    './client/main.js'\n  ],\n  output: {\n    path: __dirname,\n    filename: 'bundle.js',\n    publicPath: '/'\n  },\n  plugins: [\n    new webpack.optimize.OccurenceOrderPlugin(),\n    new webpack.HotModuleReplacementPlugin(),\n    new webpack.NoErrorsPlugin()\n    //new ExtractTextPlugin('main.css')\n  ],\n  resolve: {\n    extensions: ['', '.js'],\n    alias: {\n      request: 'browser-request'\n    }\n  },\n  module: {\n    loaders: [\n      {\n        test: /\\.scss$/,\n        //loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),\n        loaders: ['style-loader', 'css-loader', 'sass-loader'],\n        include: path.join(__dirname, 'client', 'sass')\n      },\n      {\n        test: /\\.js$/,\n        loader: 'babel',\n        include: path.join(__dirname, 'client'),\n        query: {\n          \"env\": {\n            \"development\": {\n              \"presets\": [\"react-hmre\", \"stage-0\"],\n              \"plugins\": [\n                [\"react-transform\", {\n                  \"transforms\": [{\n                    \"transform\": \"react-transform-hmr\",\n                    \"imports\": [\"react\"],\n                    \"locals\": [\"module\"]\n                  }]\n                }]\n              ]\n            }\n          },\n        }\n      }\n      /*\n      // CSS\n      {\n        test: /\\.css$/,\n        include: path.join(__dirname, 'client'),\n        loader: 'style-loader!css-loader?' + qs.stringify({\n          modules: true,\n          importLoaders: 1,\n          localIdentName: '[path][name]-[local]'\n        })\n      }\n      */\n\n    ]\n  }\n};\n"
+      ]
+    },
+    "mtime": 1457729478000
+  },
+  "{\"filename\":\"/Users/swest1/apps/sandbox/universal-webpack-react/webpack.config.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],{\"async\":false,\"asyncGenerators\":false}],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],{\"async\":false,\"asyncGenerators\":false}]],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false}:6.4.5": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/Users/swest1/apps/sandbox/universal-webpack-react/webpack.config.js",
+      "filenameRelative": "/Users/swest1/apps/sandbox/universal-webpack-react/webpack.config.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          {
+            "async": false,
+            "asyncGenerators": false
+          }
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          {
+            "async": false,
+            "asyncGenerators": false
+          }
+        ]
+      ],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMap": "both",
+      "sourceMaps": "both",
+      "sourceMapTarget": "webpack.config.js",
+      "sourceFileName": "webpack.config.js",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleIds": false,
+      "basename": "webpack.config"
+    },
+    "ignored": false,
+    "code": "'use strict';\n\nvar path = require('path');\nvar qs = require('querystring');\nvar webpack = require('webpack');\nvar ExtractTextPlugin = require('extract-text-webpack-plugin');\n\nprocess.env.NODE_ENV = process.env.NODE_ENV || \"development\";\n\nmodule.exports = {\n  devtool: '#eval-source-map',\n  entry: ['webpack-hot-middleware/client', './client/main.js'],\n  output: {\n    path: __dirname,\n    filename: 'bundle.js',\n    publicPath: '/'\n  },\n  plugins: [new webpack.optimize.OccurenceOrderPlugin(), new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin()\n  //new ExtractTextPlugin('main.css')\n  ],\n  resolve: {\n    extensions: ['', '.js'],\n    alias: {\n      request: 'browser-request'\n    }\n  },\n  module: {\n    loaders: [{\n      test: /\\.scss$/,\n      //loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),\n      loaders: ['style-loader', 'css-loader', 'sass-loader'],\n      include: path.join(__dirname, 'client', 'sass')\n    }, {\n      test: /\\.js$/,\n      loader: 'babel',\n      include: path.join(__dirname, 'client'),\n      query: {\n        \"env\": {\n          \"development\": {\n            \"presets\": [\"react-hmre\", \"stage-0\"],\n            \"plugins\": [[\"react-transform\", {\n              \"transforms\": [{\n                \"transform\": \"react-transform-hmr\",\n                \"imports\": [\"react\"],\n                \"locals\": [\"module\"]\n              }]\n            }]]\n          }\n        }\n      }\n    }\n    /*\n    // CSS\n    {\n      test: /\\.css$/,\n      include: path.join(__dirname, 'client'),\n      loader: 'style-loader!css-loader?' + qs.stringify({\n        modules: true,\n        importLoaders: 1,\n        localIdentName: '[path][name]-[local]'\n      })\n    }\n    */\n\n    ]\n  }\n};\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2suY29uZmlnLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsSUFBSSxPQUFPLFFBQVEsTUFBUixDQUFQO0FBQ0osSUFBSSxLQUFLLFFBQVEsYUFBUixDQUFMO0FBQ0osSUFBSSxVQUFVLFFBQVEsU0FBUixDQUFWO0FBQ0osSUFBSSxvQkFBb0IsUUFBUSw2QkFBUixDQUFwQjs7QUFFSixRQUFRLEdBQVIsQ0FBWSxRQUFaLEdBQXVCLFFBQVEsR0FBUixDQUFZLFFBQVosSUFBd0IsYUFBeEI7O0FBRXZCLE9BQU8sT0FBUCxHQUFpQjtBQUNmLFdBQVMsa0JBQVQ7QUFDQSxTQUFPLENBQ0wsK0JBREssRUFFTCxrQkFGSyxDQUFQO0FBSUEsVUFBUTtBQUNOLFVBQU0sU0FBTjtBQUNBLGNBQVUsV0FBVjtBQUNBLGdCQUFZLEdBQVo7R0FIRjtBQUtBLFdBQVMsQ0FDUCxJQUFJLFFBQVEsUUFBUixDQUFpQixvQkFBakIsRUFERyxFQUVQLElBQUksUUFBUSwwQkFBUixFQUZHLEVBR1AsSUFBSSxRQUFRLGNBQVI7O0FBSEcsR0FBVDtBQU1BLFdBQVM7QUFDUCxnQkFBWSxDQUFDLEVBQUQsRUFBSyxLQUFMLENBQVo7QUFDQSxXQUFPO0FBQ0wsZUFBUyxpQkFBVDtLQURGO0dBRkY7QUFNQSxVQUFRO0FBQ04sYUFBUyxDQUNQO0FBQ0UsWUFBTSxTQUFOOztBQUVBLGVBQVMsQ0FBQyxjQUFELEVBQWlCLFlBQWpCLEVBQStCLGFBQS9CLENBQVQ7QUFDQSxlQUFTLEtBQUssSUFBTCxDQUFVLFNBQVYsRUFBcUIsUUFBckIsRUFBK0IsTUFBL0IsQ0FBVDtLQUxLLEVBT1A7QUFDRSxZQUFNLE9BQU47QUFDQSxjQUFRLE9BQVI7QUFDQSxlQUFTLEtBQUssSUFBTCxDQUFVLFNBQVYsRUFBcUIsUUFBckIsQ0FBVDtBQUNBLGFBQU87QUFDTCxlQUFPO0FBQ0wseUJBQWU7QUFDYix1QkFBVyxDQUFDLFlBQUQsRUFBZSxTQUFmLENBQVg7QUFDQSx1QkFBVyxDQUNULENBQUMsaUJBQUQsRUFBb0I7QUFDbEIsNEJBQWMsQ0FBQztBQUNiLDZCQUFhLHFCQUFiO0FBQ0EsMkJBQVcsQ0FBQyxPQUFELENBQVg7QUFDQSwwQkFBVSxDQUFDLFFBQUQsQ0FBVjtlQUhZLENBQWQ7YUFERixDQURTLENBQVg7V0FGRjtTQURGO09BREY7Ozs7Ozs7Ozs7Ozs7OztBQVhLLEtBQVQ7R0FERjtDQXZCRiIsImZpbGUiOiJ3ZWJwYWNrLmNvbmZpZy5qcyIsInNvdXJjZXNDb250ZW50IjpbInZhciBwYXRoID0gcmVxdWlyZSgncGF0aCcpO1xudmFyIHFzID0gcmVxdWlyZSgncXVlcnlzdHJpbmcnKTtcbnZhciB3ZWJwYWNrID0gcmVxdWlyZSgnd2VicGFjaycpO1xudmFyIEV4dHJhY3RUZXh0UGx1Z2luID0gcmVxdWlyZSgnZXh0cmFjdC10ZXh0LXdlYnBhY2stcGx1Z2luJyk7XG5cbnByb2Nlc3MuZW52Lk5PREVfRU5WID0gcHJvY2Vzcy5lbnYuTk9ERV9FTlYgfHwgXCJkZXZlbG9wbWVudFwiO1xuXG5tb2R1bGUuZXhwb3J0cyA9IHtcbiAgZGV2dG9vbDogJyNldmFsLXNvdXJjZS1tYXAnLFxuICBlbnRyeTogW1xuICAgICd3ZWJwYWNrLWhvdC1taWRkbGV3YXJlL2NsaWVudCcsXG4gICAgJy4vY2xpZW50L21haW4uanMnXG4gIF0sXG4gIG91dHB1dDoge1xuICAgIHBhdGg6IF9fZGlybmFtZSxcbiAgICBmaWxlbmFtZTogJ2J1bmRsZS5qcycsXG4gICAgcHVibGljUGF0aDogJy8nXG4gIH0sXG4gIHBsdWdpbnM6IFtcbiAgICBuZXcgd2VicGFjay5vcHRpbWl6ZS5PY2N1cmVuY2VPcmRlclBsdWdpbigpLFxuICAgIG5ldyB3ZWJwYWNrLkhvdE1vZHVsZVJlcGxhY2VtZW50UGx1Z2luKCksXG4gICAgbmV3IHdlYnBhY2suTm9FcnJvcnNQbHVnaW4oKVxuICAgIC8vbmV3IEV4dHJhY3RUZXh0UGx1Z2luKCdtYWluLmNzcycpXG4gIF0sXG4gIHJlc29sdmU6IHtcbiAgICBleHRlbnNpb25zOiBbJycsICcuanMnXSxcbiAgICBhbGlhczoge1xuICAgICAgcmVxdWVzdDogJ2Jyb3dzZXItcmVxdWVzdCdcbiAgICB9XG4gIH0sXG4gIG1vZHVsZToge1xuICAgIGxvYWRlcnM6IFtcbiAgICAgIHtcbiAgICAgICAgdGVzdDogL1xcLnNjc3MkLyxcbiAgICAgICAgLy9sb2FkZXI6IEV4dHJhY3RUZXh0UGx1Z2luLmV4dHJhY3QoJ3N0eWxlLWxvYWRlcicsICdjc3MtbG9hZGVyIXNhc3MtbG9hZGVyJyksXG4gICAgICAgIGxvYWRlcnM6IFsnc3R5bGUtbG9hZGVyJywgJ2Nzcy1sb2FkZXInLCAnc2Fzcy1sb2FkZXInXSxcbiAgICAgICAgaW5jbHVkZTogcGF0aC5qb2luKF9fZGlybmFtZSwgJ2NsaWVudCcsICdzYXNzJylcbiAgICAgIH0sXG4gICAgICB7XG4gICAgICAgIHRlc3Q6IC9cXC5qcyQvLFxuICAgICAgICBsb2FkZXI6ICdiYWJlbCcsXG4gICAgICAgIGluY2x1ZGU6IHBhdGguam9pbihfX2Rpcm5hbWUsICdjbGllbnQnKSxcbiAgICAgICAgcXVlcnk6IHtcbiAgICAgICAgICBcImVudlwiOiB7XG4gICAgICAgICAgICBcImRldmVsb3BtZW50XCI6IHtcbiAgICAgICAgICAgICAgXCJwcmVzZXRzXCI6IFtcInJlYWN0LWhtcmVcIiwgXCJzdGFnZS0wXCJdLFxuICAgICAgICAgICAgICBcInBsdWdpbnNcIjogW1xuICAgICAgICAgICAgICAgIFtcInJlYWN0LXRyYW5zZm9ybVwiLCB7XG4gICAgICAgICAgICAgICAgICBcInRyYW5zZm9ybXNcIjogW3tcbiAgICAgICAgICAgICAgICAgICAgXCJ0cmFuc2Zvcm1cIjogXCJyZWFjdC10cmFuc2Zvcm0taG1yXCIsXG4gICAgICAgICAgICAgICAgICAgIFwiaW1wb3J0c1wiOiBbXCJyZWFjdFwiXSxcbiAgICAgICAgICAgICAgICAgICAgXCJsb2NhbHNcIjogW1wibW9kdWxlXCJdXG4gICAgICAgICAgICAgICAgICB9XVxuICAgICAgICAgICAgICAgIH1dXG4gICAgICAgICAgICAgIF1cbiAgICAgICAgICAgIH1cbiAgICAgICAgICB9LFxuICAgICAgICB9XG4gICAgICB9XG4gICAgICAvKlxuICAgICAgLy8gQ1NTXG4gICAgICB7XG4gICAgICAgIHRlc3Q6IC9cXC5jc3MkLyxcbiAgICAgICAgaW5jbHVkZTogcGF0aC5qb2luKF9fZGlybmFtZSwgJ2NsaWVudCcpLFxuICAgICAgICBsb2FkZXI6ICdzdHlsZS1sb2FkZXIhY3NzLWxvYWRlcj8nICsgcXMuc3RyaW5naWZ5KHtcbiAgICAgICAgICBtb2R1bGVzOiB0cnVlLFxuICAgICAgICAgIGltcG9ydExvYWRlcnM6IDEsXG4gICAgICAgICAgbG9jYWxJZGVudE5hbWU6ICdbcGF0aF1bbmFtZV0tW2xvY2FsXSdcbiAgICAgICAgfSlcbiAgICAgIH1cbiAgICAgICovXG5cbiAgICBdXG4gIH1cbn07XG4iXX0=",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "webpack.config.js"
+      ],
+      "names": [],
+      "mappings": ";;AAAA,IAAI,OAAO,QAAQ,MAAR,CAAP;AACJ,IAAI,KAAK,QAAQ,aAAR,CAAL;AACJ,IAAI,UAAU,QAAQ,SAAR,CAAV;AACJ,IAAI,oBAAoB,QAAQ,6BAAR,CAApB;;AAEJ,QAAQ,GAAR,CAAY,QAAZ,GAAuB,QAAQ,GAAR,CAAY,QAAZ,IAAwB,aAAxB;;AAEvB,OAAO,OAAP,GAAiB;AACf,WAAS,kBAAT;AACA,SAAO,CACL,+BADK,EAEL,kBAFK,CAAP;AAIA,UAAQ;AACN,UAAM,SAAN;AACA,cAAU,WAAV;AACA,gBAAY,GAAZ;GAHF;AAKA,WAAS,CACP,IAAI,QAAQ,QAAR,CAAiB,oBAAjB,EADG,EAEP,IAAI,QAAQ,0BAAR,EAFG,EAGP,IAAI,QAAQ,cAAR;;AAHG,GAAT;AAMA,WAAS;AACP,gBAAY,CAAC,EAAD,EAAK,KAAL,CAAZ;AACA,WAAO;AACL,eAAS,iBAAT;KADF;GAFF;AAMA,UAAQ;AACN,aAAS,CACP;AACE,YAAM,SAAN;;AAEA,eAAS,CAAC,cAAD,EAAiB,YAAjB,EAA+B,aAA/B,CAAT;AACA,eAAS,KAAK,IAAL,CAAU,SAAV,EAAqB,QAArB,EAA+B,MAA/B,CAAT;KALK,EAOP;AACE,YAAM,OAAN;AACA,cAAQ,OAAR;AACA,eAAS,KAAK,IAAL,CAAU,SAAV,EAAqB,QAArB,CAAT;AACA,aAAO;AACL,eAAO;AACL,yBAAe;AACb,uBAAW,CAAC,YAAD,EAAe,SAAf,CAAX;AACA,uBAAW,CACT,CAAC,iBAAD,EAAoB;AAClB,4BAAc,CAAC;AACb,6BAAa,qBAAb;AACA,2BAAW,CAAC,OAAD,CAAX;AACA,0BAAU,CAAC,QAAD,CAAV;eAHY,CAAd;aADF,CADS,CAAX;WAFF;SADF;OADF;;;;;;;;;;;;;;;AAXK,KAAT;GADF;CAvBF",
+      "file": "webpack.config.js",
+      "sourcesContent": [
+        "var path = require('path');\nvar qs = require('querystring');\nvar webpack = require('webpack');\nvar ExtractTextPlugin = require('extract-text-webpack-plugin');\n\nprocess.env.NODE_ENV = process.env.NODE_ENV || \"development\";\n\nmodule.exports = {\n  devtool: '#eval-source-map',\n  entry: [\n    'webpack-hot-middleware/client',\n    './client/main.js'\n  ],\n  output: {\n    path: __dirname,\n    filename: 'bundle.js',\n    publicPath: '/'\n  },\n  plugins: [\n    new webpack.optimize.OccurenceOrderPlugin(),\n    new webpack.HotModuleReplacementPlugin(),\n    new webpack.NoErrorsPlugin()\n    //new ExtractTextPlugin('main.css')\n  ],\n  resolve: {\n    extensions: ['', '.js'],\n    alias: {\n      request: 'browser-request'\n    }\n  },\n  module: {\n    loaders: [\n      {\n        test: /\\.scss$/,\n        //loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),\n        loaders: ['style-loader', 'css-loader', 'sass-loader'],\n        include: path.join(__dirname, 'client', 'sass')\n      },\n      {\n        test: /\\.js$/,\n        loader: 'babel',\n        include: path.join(__dirname, 'client'),\n        query: {\n          \"env\": {\n            \"development\": {\n              \"presets\": [\"react-hmre\", \"stage-0\"],\n              \"plugins\": [\n                [\"react-transform\", {\n                  \"transforms\": [{\n                    \"transform\": \"react-transform-hmr\",\n                    \"imports\": [\"react\"],\n                    \"locals\": [\"module\"]\n                  }]\n                }]\n              ]\n            }\n          },\n        }\n      }\n      /*\n      // CSS\n      {\n        test: /\\.css$/,\n        include: path.join(__dirname, 'client'),\n        loader: 'style-loader!css-loader?' + qs.stringify({\n          modules: true,\n          importLoaders: 1,\n          localIdentName: '[path][name]-[local]'\n        })\n      }\n      */\n\n    ]\n  }\n};\n"
+      ]
+    },
+    "mtime": 1457729478000
+  },
+  "{\"filename\":\"/Users/swest1/apps/sandbox/universal-webpack-react/webpack.config.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],{\"async\":false,\"asyncGenerators\":false}],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],{\"async\":false,\"asyncGenerators\":false}]],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false}:6.4.5": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/Users/swest1/apps/sandbox/universal-webpack-react/webpack.config.js",
+      "filenameRelative": "/Users/swest1/apps/sandbox/universal-webpack-react/webpack.config.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          {
+            "async": false,
+            "asyncGenerators": false
+          }
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          {
+            "async": false,
+            "asyncGenerators": false
+          }
+        ]
+      ],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMap": "both",
+      "sourceMaps": "both",
+      "sourceMapTarget": "webpack.config.js",
+      "sourceFileName": "webpack.config.js",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleIds": false,
+      "basename": "webpack.config"
+    },
+    "ignored": false,
+    "code": "'use strict';\n\nvar path = require('path');\nvar qs = require('querystring');\nvar webpack = require('webpack');\nvar ExtractTextPlugin = require('extract-text-webpack-plugin');\n\nprocess.env.NODE_ENV = process.env.NODE_ENV || \"development\";\n\nmodule.exports = {\n  devtool: '#eval-source-map',\n  entry: ['webpack-hot-middleware/client', './client/main.js'],\n  output: {\n    path: __dirname,\n    filename: 'bundle.js',\n    publicPath: '/'\n  },\n  plugins: [new webpack.optimize.OccurenceOrderPlugin(), new webpack.HotModuleReplacementPlugin(), new webpack.NoErrorsPlugin()\n  //new ExtractTextPlugin('main.css')\n  ],\n  resolve: {\n    extensions: ['', '.js'],\n    alias: {\n      request: 'browser-request'\n    }\n  },\n  module: {\n    loaders: [{\n      test: /\\.scss$/,\n      //loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),\n      loaders: ['style-loader', 'css-loader', 'sass-loader'],\n      include: path.join(__dirname, 'client', 'sass')\n    }, {\n      test: /\\.js$/,\n      loader: 'babel',\n      include: path.join(__dirname, 'client'),\n      query: {\n        \"env\": {\n          \"development\": {\n            \"presets\": [\"react-hmre\", \"stage-0\"],\n            \"plugins\": [[\"react-transform\", {\n              \"transforms\": [{\n                \"transform\": \"react-transform-hmr\",\n                \"imports\": [\"react\"],\n                \"locals\": [\"module\"]\n              }]\n            }]]\n          }\n        }\n      }\n    }\n    /*\n    // CSS\n    {\n      test: /\\.css$/,\n      include: path.join(__dirname, 'client'),\n      loader: 'style-loader!css-loader?' + qs.stringify({\n        modules: true,\n        importLoaders: 1,\n        localIdentName: '[path][name]-[local]'\n      })\n    }\n    */\n\n    ]\n  }\n};\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2suY29uZmlnLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsSUFBSSxPQUFPLFFBQVEsTUFBUixDQUFQO0FBQ0osSUFBSSxLQUFLLFFBQVEsYUFBUixDQUFMO0FBQ0osSUFBSSxVQUFVLFFBQVEsU0FBUixDQUFWO0FBQ0osSUFBSSxvQkFBb0IsUUFBUSw2QkFBUixDQUFwQjs7QUFFSixRQUFRLEdBQVIsQ0FBWSxRQUFaLEdBQXVCLFFBQVEsR0FBUixDQUFZLFFBQVosSUFBd0IsYUFBeEI7O0FBRXZCLE9BQU8sT0FBUCxHQUFpQjtBQUNmLFdBQVMsa0JBQVQ7QUFDQSxTQUFPLENBQ0wsK0JBREssRUFFTCxrQkFGSyxDQUFQO0FBSUEsVUFBUTtBQUNOLFVBQU0sU0FBTjtBQUNBLGNBQVUsV0FBVjtBQUNBLGdCQUFZLEdBQVo7R0FIRjtBQUtBLFdBQVMsQ0FDUCxJQUFJLFFBQVEsUUFBUixDQUFpQixvQkFBakIsRUFERyxFQUVQLElBQUksUUFBUSwwQkFBUixFQUZHLEVBR1AsSUFBSSxRQUFRLGNBQVI7O0FBSEcsR0FBVDtBQU1BLFdBQVM7QUFDUCxnQkFBWSxDQUFDLEVBQUQsRUFBSyxLQUFMLENBQVo7QUFDQSxXQUFPO0FBQ0wsZUFBUyxpQkFBVDtLQURGO0dBRkY7QUFNQSxVQUFRO0FBQ04sYUFBUyxDQUNQO0FBQ0UsWUFBTSxTQUFOOztBQUVBLGVBQVMsQ0FBQyxjQUFELEVBQWlCLFlBQWpCLEVBQStCLGFBQS9CLENBQVQ7QUFDQSxlQUFTLEtBQUssSUFBTCxDQUFVLFNBQVYsRUFBcUIsUUFBckIsRUFBK0IsTUFBL0IsQ0FBVDtLQUxLLEVBT1A7QUFDRSxZQUFNLE9BQU47QUFDQSxjQUFRLE9BQVI7QUFDQSxlQUFTLEtBQUssSUFBTCxDQUFVLFNBQVYsRUFBcUIsUUFBckIsQ0FBVDtBQUNBLGFBQU87QUFDTCxlQUFPO0FBQ0wseUJBQWU7QUFDYix1QkFBVyxDQUFDLFlBQUQsRUFBZSxTQUFmLENBQVg7QUFDQSx1QkFBVyxDQUNULENBQUMsaUJBQUQsRUFBb0I7QUFDbEIsNEJBQWMsQ0FBQztBQUNiLDZCQUFhLHFCQUFiO0FBQ0EsMkJBQVcsQ0FBQyxPQUFELENBQVg7QUFDQSwwQkFBVSxDQUFDLFFBQUQsQ0FBVjtlQUhZLENBQWQ7YUFERixDQURTLENBQVg7V0FGRjtTQURGO09BREY7Ozs7Ozs7Ozs7Ozs7OztBQVhLLEtBQVQ7R0FERjtDQXZCRiIsImZpbGUiOiJ3ZWJwYWNrLmNvbmZpZy5qcyIsInNvdXJjZXNDb250ZW50IjpbInZhciBwYXRoID0gcmVxdWlyZSgncGF0aCcpO1xudmFyIHFzID0gcmVxdWlyZSgncXVlcnlzdHJpbmcnKTtcbnZhciB3ZWJwYWNrID0gcmVxdWlyZSgnd2VicGFjaycpO1xudmFyIEV4dHJhY3RUZXh0UGx1Z2luID0gcmVxdWlyZSgnZXh0cmFjdC10ZXh0LXdlYnBhY2stcGx1Z2luJyk7XG5cbnByb2Nlc3MuZW52Lk5PREVfRU5WID0gcHJvY2Vzcy5lbnYuTk9ERV9FTlYgfHwgXCJkZXZlbG9wbWVudFwiO1xuXG5tb2R1bGUuZXhwb3J0cyA9IHtcbiAgZGV2dG9vbDogJyNldmFsLXNvdXJjZS1tYXAnLFxuICBlbnRyeTogW1xuICAgICd3ZWJwYWNrLWhvdC1taWRkbGV3YXJlL2NsaWVudCcsXG4gICAgJy4vY2xpZW50L21haW4uanMnXG4gIF0sXG4gIG91dHB1dDoge1xuICAgIHBhdGg6IF9fZGlybmFtZSxcbiAgICBmaWxlbmFtZTogJ2J1bmRsZS5qcycsXG4gICAgcHVibGljUGF0aDogJy8nXG4gIH0sXG4gIHBsdWdpbnM6IFtcbiAgICBuZXcgd2VicGFjay5vcHRpbWl6ZS5PY2N1cmVuY2VPcmRlclBsdWdpbigpLFxuICAgIG5ldyB3ZWJwYWNrLkhvdE1vZHVsZVJlcGxhY2VtZW50UGx1Z2luKCksXG4gICAgbmV3IHdlYnBhY2suTm9FcnJvcnNQbHVnaW4oKVxuICAgIC8vbmV3IEV4dHJhY3RUZXh0UGx1Z2luKCdtYWluLmNzcycpXG4gIF0sXG4gIHJlc29sdmU6IHtcbiAgICBleHRlbnNpb25zOiBbJycsICcuanMnXSxcbiAgICBhbGlhczoge1xuICAgICAgcmVxdWVzdDogJ2Jyb3dzZXItcmVxdWVzdCdcbiAgICB9XG4gIH0sXG4gIG1vZHVsZToge1xuICAgIGxvYWRlcnM6IFtcbiAgICAgIHtcbiAgICAgICAgdGVzdDogL1xcLnNjc3MkLyxcbiAgICAgICAgLy9sb2FkZXI6IEV4dHJhY3RUZXh0UGx1Z2luLmV4dHJhY3QoJ3N0eWxlLWxvYWRlcicsICdjc3MtbG9hZGVyIXNhc3MtbG9hZGVyJyksXG4gICAgICAgIGxvYWRlcnM6IFsnc3R5bGUtbG9hZGVyJywgJ2Nzcy1sb2FkZXInLCAnc2Fzcy1sb2FkZXInXSxcbiAgICAgICAgaW5jbHVkZTogcGF0aC5qb2luKF9fZGlybmFtZSwgJ2NsaWVudCcsICdzYXNzJylcbiAgICAgIH0sXG4gICAgICB7XG4gICAgICAgIHRlc3Q6IC9cXC5qcyQvLFxuICAgICAgICBsb2FkZXI6ICdiYWJlbCcsXG4gICAgICAgIGluY2x1ZGU6IHBhdGguam9pbihfX2Rpcm5hbWUsICdjbGllbnQnKSxcbiAgICAgICAgcXVlcnk6IHtcbiAgICAgICAgICBcImVudlwiOiB7XG4gICAgICAgICAgICBcImRldmVsb3BtZW50XCI6IHtcbiAgICAgICAgICAgICAgXCJwcmVzZXRzXCI6IFtcInJlYWN0LWhtcmVcIiwgXCJzdGFnZS0wXCJdLFxuICAgICAgICAgICAgICBcInBsdWdpbnNcIjogW1xuICAgICAgICAgICAgICAgIFtcInJlYWN0LXRyYW5zZm9ybVwiLCB7XG4gICAgICAgICAgICAgICAgICBcInRyYW5zZm9ybXNcIjogW3tcbiAgICAgICAgICAgICAgICAgICAgXCJ0cmFuc2Zvcm1cIjogXCJyZWFjdC10cmFuc2Zvcm0taG1yXCIsXG4gICAgICAgICAgICAgICAgICAgIFwiaW1wb3J0c1wiOiBbXCJyZWFjdFwiXSxcbiAgICAgICAgICAgICAgICAgICAgXCJsb2NhbHNcIjogW1wibW9kdWxlXCJdXG4gICAgICAgICAgICAgICAgICB9XVxuICAgICAgICAgICAgICAgIH1dXG4gICAgICAgICAgICAgIF1cbiAgICAgICAgICAgIH1cbiAgICAgICAgICB9LFxuICAgICAgICB9XG4gICAgICB9XG4gICAgICAvKlxuICAgICAgLy8gQ1NTXG4gICAgICB7XG4gICAgICAgIHRlc3Q6IC9cXC5jc3MkLyxcbiAgICAgICAgaW5jbHVkZTogcGF0aC5qb2luKF9fZGlybmFtZSwgJ2NsaWVudCcpLFxuICAgICAgICBsb2FkZXI6ICdzdHlsZS1sb2FkZXIhY3NzLWxvYWRlcj8nICsgcXMuc3RyaW5naWZ5KHtcbiAgICAgICAgICBtb2R1bGVzOiB0cnVlLFxuICAgICAgICAgIGltcG9ydExvYWRlcnM6IDEsXG4gICAgICAgICAgbG9jYWxJZGVudE5hbWU6ICdbcGF0aF1bbmFtZV0tW2xvY2FsXSdcbiAgICAgICAgfSlcbiAgICAgIH1cbiAgICAgICovXG5cbiAgICBdXG4gIH1cbn07XG4iXX0=",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "webpack.config.js"
+      ],
+      "names": [],
+      "mappings": ";;AAAA,IAAI,OAAO,QAAQ,MAAR,CAAP;AACJ,IAAI,KAAK,QAAQ,aAAR,CAAL;AACJ,IAAI,UAAU,QAAQ,SAAR,CAAV;AACJ,IAAI,oBAAoB,QAAQ,6BAAR,CAApB;;AAEJ,QAAQ,GAAR,CAAY,QAAZ,GAAuB,QAAQ,GAAR,CAAY,QAAZ,IAAwB,aAAxB;;AAEvB,OAAO,OAAP,GAAiB;AACf,WAAS,kBAAT;AACA,SAAO,CACL,+BADK,EAEL,kBAFK,CAAP;AAIA,UAAQ;AACN,UAAM,SAAN;AACA,cAAU,WAAV;AACA,gBAAY,GAAZ;GAHF;AAKA,WAAS,CACP,IAAI,QAAQ,QAAR,CAAiB,oBAAjB,EADG,EAEP,IAAI,QAAQ,0BAAR,EAFG,EAGP,IAAI,QAAQ,cAAR;;AAHG,GAAT;AAMA,WAAS;AACP,gBAAY,CAAC,EAAD,EAAK,KAAL,CAAZ;AACA,WAAO;AACL,eAAS,iBAAT;KADF;GAFF;AAMA,UAAQ;AACN,aAAS,CACP;AACE,YAAM,SAAN;;AAEA,eAAS,CAAC,cAAD,EAAiB,YAAjB,EAA+B,aAA/B,CAAT;AACA,eAAS,KAAK,IAAL,CAAU,SAAV,EAAqB,QAArB,EAA+B,MAA/B,CAAT;KALK,EAOP;AACE,YAAM,OAAN;AACA,cAAQ,OAAR;AACA,eAAS,KAAK,IAAL,CAAU,SAAV,EAAqB,QAArB,CAAT;AACA,aAAO;AACL,eAAO;AACL,yBAAe;AACb,uBAAW,CAAC,YAAD,EAAe,SAAf,CAAX;AACA,uBAAW,CACT,CAAC,iBAAD,EAAoB;AAClB,4BAAc,CAAC;AACb,6BAAa,qBAAb;AACA,2BAAW,CAAC,OAAD,CAAX;AACA,0BAAU,CAAC,QAAD,CAAV;eAHY,CAAd;aADF,CADS,CAAX;WAFF;SADF;OADF;;;;;;;;;;;;;;;AAXK,KAAT;GADF;CAvBF",
+      "file": "webpack.config.js",
+      "sourcesContent": [
+        "var path = require('path');\nvar qs = require('querystring');\nvar webpack = require('webpack');\nvar ExtractTextPlugin = require('extract-text-webpack-plugin');\n\nprocess.env.NODE_ENV = process.env.NODE_ENV || \"development\";\n\nmodule.exports = {\n  devtool: '#eval-source-map',\n  entry: [\n    'webpack-hot-middleware/client',\n    './client/main.js'\n  ],\n  output: {\n    path: __dirname,\n    filename: 'bundle.js',\n    publicPath: '/'\n  },\n  plugins: [\n    new webpack.optimize.OccurenceOrderPlugin(),\n    new webpack.HotModuleReplacementPlugin(),\n    new webpack.NoErrorsPlugin()\n    //new ExtractTextPlugin('main.css')\n  ],\n  resolve: {\n    extensions: ['', '.js'],\n    alias: {\n      request: 'browser-request'\n    }\n  },\n  module: {\n    loaders: [\n      {\n        test: /\\.scss$/,\n        //loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),\n        loaders: ['style-loader', 'css-loader', 'sass-loader'],\n        include: path.join(__dirname, 'client', 'sass')\n      },\n      {\n        test: /\\.js$/,\n        loader: 'babel',\n        include: path.join(__dirname, 'client'),\n        query: {\n          \"env\": {\n            \"development\": {\n              \"presets\": [\"react-hmre\", \"stage-0\"],\n              \"plugins\": [\n                [\"react-transform\", {\n                  \"transforms\": [{\n                    \"transform\": \"react-transform-hmr\",\n                    \"imports\": [\"react\"],\n                    \"locals\": [\"module\"]\n                  }]\n                }]\n              ]\n            }\n          },\n        }\n      }\n      /*\n      // CSS\n      {\n        test: /\\.css$/,\n        include: path.join(__dirname, 'client'),\n        loader: 'style-loader!css-loader?' + qs.stringify({\n          modules: true,\n          importLoaders: 1,\n          localIdentName: '[path][name]-[local]'\n        })\n      }\n      */\n\n    ]\n  }\n};\n"
+      ]
+    },
+    "mtime": 1457729478000
+  },
+  "{\"filename\":\"/Users/swest1/apps/sandbox/universal-webpack-react/server.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],{\"async\":false,\"asyncGenerators\":false}],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],null],[[],{\"async\":false,\"asyncGenerators\":false}]],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false}:6.4.5": {
+    "metadata": {
+      "usedHelpers": [
+        "interopRequireDefault"
+      ],
+      "marked": [],
+      "modules": {
+        "imports": [
+          {
+            "source": "express",
+            "imported": [
+              "default"
+            ],
+            "specifiers": [
+              {
+                "kind": "named",
+                "imported": "default",
+                "local": "express"
+              }
+            ]
+          },
+          {
+            "source": "chokidar",
+            "imported": [
+              "default"
+            ],
+            "specifiers": [
+              {
+                "kind": "named",
+                "imported": "default",
+                "local": "chokidar"
+              }
+            ]
+          },
+          {
+            "source": "http",
+            "imported": [
+              "default"
+            ],
+            "specifiers": [
+              {
+                "kind": "named",
+                "imported": "default",
+                "local": "http"
+              }
+            ]
+          },
+          {
+            "source": "webpack",
+            "imported": [
+              "default"
+            ],
+            "specifiers": [
+              {
+                "kind": "named",
+                "imported": "default",
+                "local": "webpack"
+              }
+            ]
+          },
+          {
+            "source": "./webpack.config",
+            "imported": [
+              "default"
+            ],
+            "specifiers": [
+              {
+                "kind": "named",
+                "imported": "default",
+                "local": "config"
+              }
+            ]
+          }
+        ],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/Users/swest1/apps/sandbox/universal-webpack-react/server.js",
+      "filenameRelative": "/Users/swest1/apps/sandbox/universal-webpack-react/server.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          {
+            "async": false,
+            "asyncGenerators": false
+          }
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          null
+        ],
+        [
+          [],
+          {
+            "async": false,
+            "asyncGenerators": false
+          }
+        ]
+      ],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMap": "both",
+      "sourceMaps": "both",
+      "sourceMapTarget": "server.js",
+      "sourceFileName": "server.js",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleIds": false,
+      "basename": "server"
+    },
+    "ignored": false,
+    "code": "'use strict';\n\nvar _keys = require('babel-runtime/core-js/object/keys');\n\nvar _keys2 = _interopRequireDefault(_keys);\n\nvar _express = require('express');\n\nvar _express2 = _interopRequireDefault(_express);\n\nvar _chokidar = require('chokidar');\n\nvar _chokidar2 = _interopRequireDefault(_chokidar);\n\nvar _http = require('http');\n\nvar _http2 = _interopRequireDefault(_http);\n\nvar _webpack = require('webpack');\n\nvar _webpack2 = _interopRequireDefault(_webpack);\n\nvar _webpack3 = require('./webpack.config');\n\nvar _webpack4 = _interopRequireDefault(_webpack3);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar compiler = (0, _webpack2.default)(_webpack4.default);\nvar app = (0, _express2.default)();\n\n// Serve static content (images, etc)\napp.use(_express2.default.static('server/static'));\n\n// Serve hot-reloading bundle to client\napp.use(require(\"webpack-dev-middleware\")(compiler, {\n  noInfo: true, publicPath: _webpack4.default.output.publicPath\n}));\napp.use(require(\"webpack-hot-middleware\")(compiler));\n\n// Include server routes as a middleware\napp.use(function (req, res, next) {\n  return require('./server/app')(req, res, next);\n});\n\n// Anything else gets passed to the client app's server rendering\napp.get('*', function (req, res, next) {\n  return require('./client/server-render')(req.path, req.url, function (err, page) {\n    if (err) return next(err);\n    res.send(page);\n  });\n});\n\n// Do \"hot-reloading\" of express stuff on the server\n// Throw away cached modules and re-require next time\n// Ensure there's no important state in there!\nvar watcher = _chokidar2.default.watch('./server');\n\nwatcher.on('ready', function () {\n  return watcher.on('all', function () {\n    // TODO: use 'decache' module?\n    console.log(\"Clearing /server/ module cache from server\");\n    (0, _keys2.default)(require.cache).forEach(function (id) {\n      if (/[\\/\\\\]server[\\/\\\\]/.test(id)) delete require.cache[id];\n    });\n  });\n});\n\n// Do \"hot-reloading\" of react stuff on the server\n// Throw away the cached client modules and let them be re-required next time\ncompiler.plugin('done', function () {\n  // TODO: use 'decache' module?\n  console.log(\"Clearing /client/ module cache from server\");\n  (0, _keys2.default)(require.cache).forEach(function (id) {\n    if (/[\\/\\\\]client[\\/\\\\]/.test(id)) delete require.cache[id];\n  });\n});\n\n// Start listening for connections\nvar server = _http2.default.createServer(app);\n\nserver.listen(3000, 'localhost', function (err) {\n  if (err) throw err;\n\n  var addr = server.address();\n\n  console.log('Listening at http://%s:%d', addr.address, addr.port);\n});\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNlcnZlci5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTs7OztBQUNBOzs7O0FBQ0E7Ozs7QUFDQTs7OztBQUNBOzs7Ozs7QUFFQSxJQUFNLFdBQVcseUNBQVg7QUFDTixJQUFNLE1BQU0sd0JBQU47OztBQUdOLElBQUksR0FBSixDQUFRLGtCQUFRLE1BQVIsQ0FBZSxlQUFmLENBQVI7OztBQUdBLElBQUksR0FBSixDQUFRLFFBQVEsd0JBQVIsRUFBa0MsUUFBbEMsRUFBNEM7QUFDbEQsVUFBUSxJQUFSLEVBQWMsWUFBWSxrQkFBTyxNQUFQLENBQWMsVUFBZDtDQURwQixDQUFSO0FBR0EsSUFBSSxHQUFKLENBQVEsUUFBUSx3QkFBUixFQUFrQyxRQUFsQyxDQUFSOzs7QUFHQSxJQUFJLEdBQUosQ0FBUSxVQUFDLEdBQUQsRUFBTSxHQUFOLEVBQVcsSUFBWDtTQUFvQixRQUFRLGNBQVIsRUFBd0IsR0FBeEIsRUFBNkIsR0FBN0IsRUFBa0MsSUFBbEM7Q0FBcEIsQ0FBUjs7O0FBR0EsSUFBSSxHQUFKLENBQVEsR0FBUixFQUFhLFVBQUMsR0FBRCxFQUFNLEdBQU4sRUFBVyxJQUFYO1NBQ1gsUUFBUSx3QkFBUixFQUFrQyxJQUFJLElBQUosRUFBVSxJQUFJLEdBQUosRUFBUyxVQUFDLEdBQUQsRUFBTSxJQUFOLEVBQWU7QUFDbEUsUUFBSSxHQUFKLEVBQVMsT0FBTyxLQUFLLEdBQUwsQ0FBUCxDQUFUO0FBQ0EsUUFBSSxJQUFKLENBQVMsSUFBVCxFQUZrRTtHQUFmO0NBRDFDLENBQWI7Ozs7O0FBVUEsSUFBTSxVQUFVLG1CQUFTLEtBQVQsQ0FBZSxVQUFmLENBQVY7O0FBRU4sUUFBUSxFQUFSLENBQVcsT0FBWCxFQUFvQjtTQUNsQixRQUFRLEVBQVIsQ0FBVyxLQUFYLEVBQWtCLFlBQU07O0FBRXRCLFlBQVEsR0FBUixDQUFZLDRDQUFaLEVBRnNCO0FBR3RCLHdCQUFZLFFBQVEsS0FBUixDQUFaLENBQTJCLE9BQTNCLENBQW1DLGNBQU07QUFDdkMsVUFBSSxxQkFBcUIsSUFBckIsQ0FBMEIsRUFBMUIsQ0FBSixFQUFtQyxPQUFPLFFBQVEsS0FBUixDQUFjLEVBQWQsQ0FBUCxDQUFuQztLQURpQyxDQUFuQyxDQUhzQjtHQUFOO0NBREEsQ0FBcEI7Ozs7QUFZQSxTQUFTLE1BQVQsQ0FBZ0IsTUFBaEIsRUFBd0IsWUFBTTs7QUFFNUIsVUFBUSxHQUFSLENBQVksNENBQVosRUFGNEI7QUFHNUIsc0JBQVksUUFBUSxLQUFSLENBQVosQ0FBMkIsT0FBM0IsQ0FBbUMsVUFBUyxFQUFULEVBQWE7QUFDOUMsUUFBSSxxQkFBcUIsSUFBckIsQ0FBMEIsRUFBMUIsQ0FBSixFQUFtQyxPQUFPLFFBQVEsS0FBUixDQUFjLEVBQWQsQ0FBUCxDQUFuQztHQURpQyxDQUFuQyxDQUg0QjtDQUFOLENBQXhCOzs7QUFTQSxJQUFNLFNBQVMsZUFBSyxZQUFMLENBQWtCLEdBQWxCLENBQVQ7O0FBRU4sT0FBTyxNQUFQLENBQWMsSUFBZCxFQUFvQixXQUFwQixFQUFpQyxlQUFPO0FBQ3RDLE1BQUksR0FBSixFQUFTLE1BQU0sR0FBTixDQUFUOztBQUVBLE1BQU0sT0FBTyxPQUFPLE9BQVAsRUFBUCxDQUhnQzs7QUFLdEMsVUFBUSxHQUFSLENBQVksMkJBQVosRUFBeUMsS0FBSyxPQUFMLEVBQWMsS0FBSyxJQUFMLENBQXZELENBTHNDO0NBQVAsQ0FBakMiLCJmaWxlIjoic2VydmVyLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IGV4cHJlc3MgZnJvbSAnZXhwcmVzcyc7XG5pbXBvcnQgY2hva2lkYXIgZnJvbSAnY2hva2lkYXInO1xuaW1wb3J0IGh0dHAgZnJvbSAnaHR0cCc7XG5pbXBvcnQgd2VicGFjayBmcm9tICd3ZWJwYWNrJztcbmltcG9ydCBjb25maWcgZnJvbSAnLi93ZWJwYWNrLmNvbmZpZyc7XG5cbmNvbnN0IGNvbXBpbGVyID0gd2VicGFjayhjb25maWcpO1xuY29uc3QgYXBwID0gZXhwcmVzcygpO1xuXG4vLyBTZXJ2ZSBzdGF0aWMgY29udGVudCAoaW1hZ2VzLCBldGMpXG5hcHAudXNlKGV4cHJlc3Muc3RhdGljKCdzZXJ2ZXIvc3RhdGljJykpO1xuXG4vLyBTZXJ2ZSBob3QtcmVsb2FkaW5nIGJ1bmRsZSB0byBjbGllbnRcbmFwcC51c2UocmVxdWlyZShcIndlYnBhY2stZGV2LW1pZGRsZXdhcmVcIikoY29tcGlsZXIsIHtcbiAgbm9JbmZvOiB0cnVlLCBwdWJsaWNQYXRoOiBjb25maWcub3V0cHV0LnB1YmxpY1BhdGhcbn0pKTtcbmFwcC51c2UocmVxdWlyZShcIndlYnBhY2staG90LW1pZGRsZXdhcmVcIikoY29tcGlsZXIpKTtcblxuLy8gSW5jbHVkZSBzZXJ2ZXIgcm91dGVzIGFzIGEgbWlkZGxld2FyZVxuYXBwLnVzZSgocmVxLCByZXMsIG5leHQpID0+IHJlcXVpcmUoJy4vc2VydmVyL2FwcCcpKHJlcSwgcmVzLCBuZXh0KSk7XG5cbi8vIEFueXRoaW5nIGVsc2UgZ2V0cyBwYXNzZWQgdG8gdGhlIGNsaWVudCBhcHAncyBzZXJ2ZXIgcmVuZGVyaW5nXG5hcHAuZ2V0KCcqJywgKHJlcSwgcmVzLCBuZXh0KSA9PiBcbiAgcmVxdWlyZSgnLi9jbGllbnQvc2VydmVyLXJlbmRlcicpKHJlcS5wYXRoLCByZXEudXJsLCAoZXJyLCBwYWdlKSA9PiB7XG4gICAgaWYgKGVycikgcmV0dXJuIG5leHQoZXJyKTtcbiAgICByZXMuc2VuZChwYWdlKTtcbiAgfSlcbik7XG5cbi8vIERvIFwiaG90LXJlbG9hZGluZ1wiIG9mIGV4cHJlc3Mgc3R1ZmYgb24gdGhlIHNlcnZlclxuLy8gVGhyb3cgYXdheSBjYWNoZWQgbW9kdWxlcyBhbmQgcmUtcmVxdWlyZSBuZXh0IHRpbWVcbi8vIEVuc3VyZSB0aGVyZSdzIG5vIGltcG9ydGFudCBzdGF0ZSBpbiB0aGVyZSFcbmNvbnN0IHdhdGNoZXIgPSBjaG9raWRhci53YXRjaCgnLi9zZXJ2ZXInKTtcblxud2F0Y2hlci5vbigncmVhZHknLCAoKSA9PlxuICB3YXRjaGVyLm9uKCdhbGwnLCAoKSA9PiB7XG4gICAgLy8gVE9ETzogdXNlICdkZWNhY2hlJyBtb2R1bGU/XG4gICAgY29uc29sZS5sb2coXCJDbGVhcmluZyAvc2VydmVyLyBtb2R1bGUgY2FjaGUgZnJvbSBzZXJ2ZXJcIik7XG4gICAgT2JqZWN0LmtleXMocmVxdWlyZS5jYWNoZSkuZm9yRWFjaChpZCA9PiB7XG4gICAgICBpZiAoL1tcXC9cXFxcXXNlcnZlcltcXC9cXFxcXS8udGVzdChpZCkpIGRlbGV0ZSByZXF1aXJlLmNhY2hlW2lkXTtcbiAgICB9KTtcbiAgfSlcbik7XG5cbi8vIERvIFwiaG90LXJlbG9hZGluZ1wiIG9mIHJlYWN0IHN0dWZmIG9uIHRoZSBzZXJ2ZXJcbi8vIFRocm93IGF3YXkgdGhlIGNhY2hlZCBjbGllbnQgbW9kdWxlcyBhbmQgbGV0IHRoZW0gYmUgcmUtcmVxdWlyZWQgbmV4dCB0aW1lXG5jb21waWxlci5wbHVnaW4oJ2RvbmUnLCAoKSA9PiB7XG4gIC8vIFRPRE86IHVzZSAnZGVjYWNoZScgbW9kdWxlP1xuICBjb25zb2xlLmxvZyhcIkNsZWFyaW5nIC9jbGllbnQvIG1vZHVsZSBjYWNoZSBmcm9tIHNlcnZlclwiKTtcbiAgT2JqZWN0LmtleXMocmVxdWlyZS5jYWNoZSkuZm9yRWFjaChmdW5jdGlvbihpZCkge1xuICAgIGlmICgvW1xcL1xcXFxdY2xpZW50W1xcL1xcXFxdLy50ZXN0KGlkKSkgZGVsZXRlIHJlcXVpcmUuY2FjaGVbaWRdO1xuICB9KTtcbn0pO1xuXG4vLyBTdGFydCBsaXN0ZW5pbmcgZm9yIGNvbm5lY3Rpb25zXG5jb25zdCBzZXJ2ZXIgPSBodHRwLmNyZWF0ZVNlcnZlcihhcHApO1xuXG5zZXJ2ZXIubGlzdGVuKDMwMDAsICdsb2NhbGhvc3QnLCBlcnIgPT4ge1xuICBpZiAoZXJyKSB0aHJvdyBlcnI7XG5cbiAgY29uc3QgYWRkciA9IHNlcnZlci5hZGRyZXNzKCk7XG5cbiAgY29uc29sZS5sb2coJ0xpc3RlbmluZyBhdCBodHRwOi8vJXM6JWQnLCBhZGRyLmFkZHJlc3MsIGFkZHIucG9ydCk7XG59KTtcbiJdfQ==",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "server.js"
+      ],
+      "names": [],
+      "mappings": ";;;;;;AAAA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAM,WAAW,yCAAX;AACN,IAAM,MAAM,wBAAN;;;AAGN,IAAI,GAAJ,CAAQ,kBAAQ,MAAR,CAAe,eAAf,CAAR;;;AAGA,IAAI,GAAJ,CAAQ,QAAQ,wBAAR,EAAkC,QAAlC,EAA4C;AAClD,UAAQ,IAAR,EAAc,YAAY,kBAAO,MAAP,CAAc,UAAd;CADpB,CAAR;AAGA,IAAI,GAAJ,CAAQ,QAAQ,wBAAR,EAAkC,QAAlC,CAAR;;;AAGA,IAAI,GAAJ,CAAQ,UAAC,GAAD,EAAM,GAAN,EAAW,IAAX;SAAoB,QAAQ,cAAR,EAAwB,GAAxB,EAA6B,GAA7B,EAAkC,IAAlC;CAApB,CAAR;;;AAGA,IAAI,GAAJ,CAAQ,GAAR,EAAa,UAAC,GAAD,EAAM,GAAN,EAAW,IAAX;SACX,QAAQ,wBAAR,EAAkC,IAAI,IAAJ,EAAU,IAAI,GAAJ,EAAS,UAAC,GAAD,EAAM,IAAN,EAAe;AAClE,QAAI,GAAJ,EAAS,OAAO,KAAK,GAAL,CAAP,CAAT;AACA,QAAI,IAAJ,CAAS,IAAT,EAFkE;GAAf;CAD1C,CAAb;;;;;AAUA,IAAM,UAAU,mBAAS,KAAT,CAAe,UAAf,CAAV;;AAEN,QAAQ,EAAR,CAAW,OAAX,EAAoB;SAClB,QAAQ,EAAR,CAAW,KAAX,EAAkB,YAAM;;AAEtB,YAAQ,GAAR,CAAY,4CAAZ,EAFsB;AAGtB,wBAAY,QAAQ,KAAR,CAAZ,CAA2B,OAA3B,CAAmC,cAAM;AACvC,UAAI,qBAAqB,IAArB,CAA0B,EAA1B,CAAJ,EAAmC,OAAO,QAAQ,KAAR,CAAc,EAAd,CAAP,CAAnC;KADiC,CAAnC,CAHsB;GAAN;CADA,CAApB;;;;AAYA,SAAS,MAAT,CAAgB,MAAhB,EAAwB,YAAM;;AAE5B,UAAQ,GAAR,CAAY,4CAAZ,EAF4B;AAG5B,sBAAY,QAAQ,KAAR,CAAZ,CAA2B,OAA3B,CAAmC,UAAS,EAAT,EAAa;AAC9C,QAAI,qBAAqB,IAArB,CAA0B,EAA1B,CAAJ,EAAmC,OAAO,QAAQ,KAAR,CAAc,EAAd,CAAP,CAAnC;GADiC,CAAnC,CAH4B;CAAN,CAAxB;;;AASA,IAAM,SAAS,eAAK,YAAL,CAAkB,GAAlB,CAAT;;AAEN,OAAO,MAAP,CAAc,IAAd,EAAoB,WAApB,EAAiC,eAAO;AACtC,MAAI,GAAJ,EAAS,MAAM,GAAN,CAAT;;AAEA,MAAM,OAAO,OAAO,OAAP,EAAP,CAHgC;;AAKtC,UAAQ,GAAR,CAAY,2BAAZ,EAAyC,KAAK,OAAL,EAAc,KAAK,IAAL,CAAvD,CALsC;CAAP,CAAjC",
+      "file": "server.js",
+      "sourcesContent": [
+        "import express from 'express';\nimport chokidar from 'chokidar';\nimport http from 'http';\nimport webpack from 'webpack';\nimport config from './webpack.config';\n\nconst compiler = webpack(config);\nconst app = express();\n\n// Serve static content (images, etc)\napp.use(express.static('server/static'));\n\n// Serve hot-reloading bundle to client\napp.use(require(\"webpack-dev-middleware\")(compiler, {\n  noInfo: true, publicPath: config.output.publicPath\n}));\napp.use(require(\"webpack-hot-middleware\")(compiler));\n\n// Include server routes as a middleware\napp.use((req, res, next) => require('./server/app')(req, res, next));\n\n// Anything else gets passed to the client app's server rendering\napp.get('*', (req, res, next) => \n  require('./client/server-render')(req.path, req.url, (err, page) => {\n    if (err) return next(err);\n    res.send(page);\n  })\n);\n\n// Do \"hot-reloading\" of express stuff on the server\n// Throw away cached modules and re-require next time\n// Ensure there's no important state in there!\nconst watcher = chokidar.watch('./server');\n\nwatcher.on('ready', () =>\n  watcher.on('all', () => {\n    // TODO: use 'decache' module?\n    console.log(\"Clearing /server/ module cache from server\");\n    Object.keys(require.cache).forEach(id => {\n      if (/[\\/\\\\]server[\\/\\\\]/.test(id)) delete require.cache[id];\n    });\n  })\n);\n\n// Do \"hot-reloading\" of react stuff on the server\n// Throw away the cached client modules and let them be re-required next time\ncompiler.plugin('done', () => {\n  // TODO: use 'decache' module?\n  console.log(\"Clearing /client/ module cache from server\");\n  Object.keys(require.cache).forEach(function(id) {\n    if (/[\\/\\\\]client[\\/\\\\]/.test(id)) delete require.cache[id];\n  });\n});\n\n// Start listening for connections\nconst server = http.createServer(app);\n\nserver.listen(3000, 'localhost', err => {\n  if (err) throw err;\n\n  const addr = server.address();\n\n  console.log('Listening at http://%s:%d', addr.address, addr.port);\n});\n"
+      ]
+    },
+    "mtime": 1457733947000
+  }
+}
