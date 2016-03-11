@@ -1,5 +1,5 @@
 # Universal-Webpack-React
-(based on Ultimate Hot Reloading Example) [https://github.com/glenjamin/ultimate-hot-reloading-example]
+[based on Ultimate Hot Reloading Example](https://github.com/glenjamin/ultimate-hot-reloading-example)
 
 ## Goals
 
