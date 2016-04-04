@@ -1,8 +1,10 @@
-var initial = {
-  num: 5,
+import { INC } from '../actions/count.js';
+
+const initial = {
+  num: 7,
 };
 
-var handlers = {
+const handlers = {
   INC(s) {
     return {
       num: s.num + 1
@@ -10,12 +12,10 @@ var handlers = {
   }
 };
 
-function reducer(state = initial, action) {
+export default function count(state = initial, action) {
   if (handlers[action.type]) {
     return handlers[action.type](state);
   }
 
   return state;
 }
-
-module.exports = reducer;

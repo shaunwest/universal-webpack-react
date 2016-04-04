@@ -19,8 +19,8 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-    //new ExtractTextPlugin('main.css')
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('main.css')
   ],
   resolve: {
     extensions: ['', '.js'],
@@ -32,8 +32,8 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        //loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
-        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
+        //loaders: ['style-loader', 'css-loader', 'sass-loader'],
         include: path.join(__dirname, 'client', 'sass')
       },
       {
@@ -54,7 +54,7 @@ module.exports = {
                 }]
               ]
             }
-          },
+          }
         }
       }
       /*

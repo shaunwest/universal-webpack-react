@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { increment } from '../actions/count.js';
 
 class Foo extends React.Component {
   render() {
@@ -7,9 +8,9 @@ class Foo extends React.Component {
 
     return (
       <div>
-        <h1>Foo!!</h1>
+        <h1>Foobar!!</h1>
         <p>{ count.num }</p>
-        <button className="box increment" onClick={() => dispatch({type: "INC"})}>
+        <button className="box increment" onClick={ () => dispatch(increment) }>
           +1
         </button>
       </div>
