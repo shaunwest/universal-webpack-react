@@ -5,6 +5,7 @@ TODO
 * What are the differences between all of the devtool source map options?
 * Chunking
 * Make sass work without linking it externally
+* Server-side-only routes should still use the index.html template
 
 ISSUES
 =====

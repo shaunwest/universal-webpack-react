@@ -57,19 +57,6 @@ module.exports = {
           }
         }
       }
-      /*
-      // CSS
-      {
-        test: /\.css$/,
-        include: path.join(__dirname, 'client'),
-        loader: 'style-loader!css-loader?' + qs.stringify({
-          modules: true,
-          importLoaders: 1,
-          localIdentName: '[path][name]-[local]'
-        })
-      }
-      */
-
     ]
   }
 };
