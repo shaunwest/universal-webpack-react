@@ -1,14 +1,14 @@
 # Universal-Webpack-React
-[based on Ultimate Hot Reloading Example](https://github.com/glenjamin/ultimate-hot-reloading-example)
+This is based on the [Ultimate Hot Reloading Example](https://github.com/glenjamin/ultimate-hot-reloading-example)
 
-## Goals
+## Features
 
   * Only one running node process
   * Client-side Redux reducer hot reloading
   * Server-side Redux reducer hot reloading
   * Client-side React component hot reloading
   * Server-side React component hot reloading
-  * Server-side express routes hot reloading
+  * Server-side express routes hot reloading (not working)
   * Routing
 
 ## Installing

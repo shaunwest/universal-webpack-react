@@ -4,13 +4,16 @@ const { Provider } = require('react-redux');
 const { renderToString } = require('react-dom/server');
 const { match, RouterContext } = require('react-router');
 const routes = require('./routes.js');
+const postRouter = require('../server/post-router.js'); 
 
 /* eslint-disable no-sync */
 const template = fs.readFileSync(__dirname + '/../index.html', 'utf8');
 /* eslint-enable no-sync */
 
-const renderTemplateOnly = (req, linkcss, nospa, callback) => {
+const renderTemplateOnly = (req, config, callback) => {
   const url = req.url;
+  const { linkcss, nospa } = config;
+
   match({ routes: routes, location: url }, (err, redirect, props) => { 
     const page = template
       .replace('<!-- CONTENT -->', '')
@@ -28,9 +31,15 @@ const renderTemplateOnly = (req, linkcss, nospa, callback) => {
   });
 }
 
-const renderUniversal = (req, linkcss, nospa, callback) => {
+const renderUniversal = (req, config, callback) => {
   const url = req.url;
+  const { linkcss, nospa } = config;
   const store = require('./store');
+
+  if (req.method === 'POST') {
+    postRouter(store, req);
+  }
+
   const state = store.getState();
 
   match({ routes: routes, location: url }, (err, redirect, props) => { 

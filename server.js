@@ -1,3 +1,5 @@
+// Startup Flags:
+//
 // Disable SPA:
 // nospa
 //
@@ -11,11 +13,19 @@ import express from 'express';
 import chokidar from 'chokidar';
 import http from 'http';
 import webpack from 'webpack';
+import bodyParser from 'body-parser';
 import config from './webpack.config';
 
-// Returns true if given argument was given on start
-// (e.g. 'npm start -- arg1 arg2')
+// Returns true if 'argValue' was given as an argument to the script
+// e.g. 'npm start -- arg1 arg2'
 const isArg = argValue => process.argv.find(arg => arg === argValue);
+
+// Stores all script arguments to an object
+// e.g. 'npm start -- arg1' becomes: { arg1: true }
+const getArgs = () => process.argv.reduce((result, arg) => {
+  result[arg] = true;
+  return result;
+}, {});
 
 // Runs through node's require cache and clears files
 // whose paths contain 'matchString'
@@ -29,24 +39,30 @@ const decache = matchString =>
     .forEach(id => console.log(`decaching ${ id }`));
 
 // Returns a completed page with or without SSR
-const render = (nossr, nospa, linkcss) => (req, res, next) => {
+const render = config => (req, res, next) => {
   const serverRender = require('./client/server-render');
-  nossr ?
-    serverRender.renderTemplateOnly(req, linkcss, nospa, (err, page) => {
+  config.nossr ?
+    serverRender.renderTemplateOnly(req, config, (err, page) => {
       if (err) return next(err);
       res.send(page);
     }) :
-    serverRender.renderUniversal(req, linkcss, nospa, (err, page) => {
+    serverRender.renderUniversal(req, config, (err, page) => {
       if (err) return next(err);
       res.send(page);
     });
 };
+
+// Get arguments passed to this script
+const args = getArgs();
 
 // Get a webpack compiler from the webpack config file
 const compiler = webpack(config);
 
 // Init Express (for serving content)
 const app = express();
+
+// Handle form body
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve static content (images, etc)
 app.use(express.static('server/static'));
@@ -57,12 +73,12 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 app.use(require('webpack-hot-middleware')(compiler));
 
-// Get server-side only routes
+// Get server-side-only routes
 app.use((req, res, next) => require('./server/app')(req, res, next));
 
 // All other routes gets passed to the client app's server rendering
-app.get('*', render(isArg('nossr'), isArg('nospa'), isArg('linkcss')));
-app.post('*', render(isArg('nossr'), isArg('nospa'), isArg('linkcss')));
+app.get('*', render(args));
+app.post('*', render(args));
 
 // Do "hot-reloading" of express stuff on the server
 // Throw away cached modules and re-require next time
