@@ -56,10 +56,12 @@ const createApp = (args, compiler) => {
   // Serve static content (images, etc)
   app.use(express.static('server/static'));
 
-  // Serve hot-reloading bundle to client
+  // Serve app bundle to client
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true, publicPath: config.output.publicPath
   }));
+
+  // Include hot module-reloading with the app bundle
   app.use(require('webpack-hot-middleware')(compiler));
 
   // Get server-side-only routes
