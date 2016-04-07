@@ -18,6 +18,8 @@ const renderTemplateOnly = (req, config, callback) => {
     const page = template
       .replace('<!-- CONTENT -->', '')
       .replace('"-- STORES --"', '{}')
+      .replace('-- MODE_COLOR --', (nospa) ? '#FF5733' : '#DAF7A6')
+      .replace('<!-- MODE -->', (nospa) ? 'No SSR/SPA' : 'No SSR')
       .replace('<!-- STYLESHEET -->', (linkcss) ?
         '<link rel="stylesheet" type="text/css" href="/main.css">' :
         ''
@@ -51,6 +53,8 @@ const renderUniversal = (req, config, callback) => {
 
     const page = template
       .replace('<!-- CONTENT -->', rendered)
+      .replace('-- MODE_COLOR --', (nospa) ? '#FFC300' : '#58D68D')
+      .replace('<!-- MODE -->', (nospa) ? 'No SPA' : 'Universal')
       .replace('"-- STORES --"', JSON.stringify(state))
       .replace('<!-- STYLESHEET -->', (linkcss) ? 
         '<link rel="stylesheet" type="text/css" href="/main.css">' :

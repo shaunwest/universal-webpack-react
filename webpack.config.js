@@ -33,7 +33,6 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
-        //loaders: ['style-loader', 'css-loader', 'sass-loader'],
         include: path.join(__dirname, 'client', 'sass')
       },
       {

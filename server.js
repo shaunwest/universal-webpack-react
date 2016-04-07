@@ -14,7 +14,8 @@ const getArgs = () => process.argv.reduce((result, arg) => {
 }, {});
 
 // Runs through node's require cache and clears files
-// whose paths contain 'matchString'
+// whose paths contain 'matchString'. Those files will
+// be reloaded if they're required again.
 const decache = matchString =>
   Object.keys(require.cache)
     .filter(id => new RegExp(`[/\]${ matchString }[/\]`).test(id))
@@ -24,6 +25,7 @@ const decache = matchString =>
     })
     .forEach(id => console.log(`decaching ${ id }`));
 
+// FIXME: This needs to be way more robust
 const reconfigureForEmbeddedSass = config => {
   config.plugins.pop();
   config.module.loaders[0].loader = undefined;
@@ -32,7 +34,7 @@ const reconfigureForEmbeddedSass = config => {
 }
 
 // Returns a completed page with or without SSR
-const render = config => (req, res, next) => {
+const getRenderHandler = config => (req, res, next) => {
   const serverRender = require('./client/server-render');
   config.nossr ?
     serverRender.renderTemplateOnly(req, config, (err, page) => {
@@ -43,7 +45,7 @@ const render = config => (req, res, next) => {
       if (err) return next(err);
       res.send(page);
     });
-};
+}
 
 // Initialize express, configure middleware and routes
 const createApp = (args, compiler) => {
@@ -68,8 +70,8 @@ const createApp = (args, compiler) => {
   app.use((req, res, next) => require('./server/app')(req, res, next));
 
   // All other routes gets passed to the client app's server rendering
-  app.get('*', render(args));
-  app.post('*', render(args));
+  app.get('*', getRenderHandler(args));
+  app.post('*', getRenderHandler(args));
 
   return app;
 }
@@ -135,13 +137,15 @@ console.log(` UNIVERSAL-WEBPACK-REACT \n`.bgMagenta);
 const args = getArgs();
 reportArgs(args);
 
-// Get a webpack compiler from the webpack config file
+// If not linking external css, webpack config needs to be modified
 if (!args.linkcss) {
   reconfigureForEmbeddedSass(config);
 }
+
+// Create a webpack compiler based on the webpack config file
 const compiler = webpack(config);
 
-// Create the app, enable module reloading and start the server
+// Create the app, enable module reloading, and start the server
 const app = createApp(args, compiler);
 handleModuleReloading();
 startServer(app);

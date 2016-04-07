@@ -7,7 +7,7 @@ export default class App extends React.Component {
       <div>
         <h1>Demo!</h1>
         <ul>
-          <li><Link to="">Go to home</Link></li>
+          <li><Link to="/">Go to home</Link></li>
           <li><Link to="counter">Go to counter</Link></li>
           <li><Link to="profile">Go to profile</Link></li>
         </ul>
