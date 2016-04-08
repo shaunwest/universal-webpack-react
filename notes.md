@@ -1,12 +1,12 @@
 TODO
 ====
 
-* Think about file structure. Actions/reducers should be shared between client/server, I think...
+* ~~Think about file structure. Actions/reducers should be shared between client/server, I think...~~
 * What are the differences between all of the devtool source map options?
 * Chunking
 * ~~Make sass work without linking it externally~~
 * Server-side-only routes should still use the index.html template
-* Mode flags (SSR, no spa, etc)
+* ~~Mode flags (SSR, no spa, etc)~~
 * Prod build
 
 ISSUES
@@ -47,3 +47,4 @@ Ideals?
         a full page reload would definitely get client/server in sync
         but before then, the server would theoretically be out of sync?
           so server services, server-only routes, form services would potentially be broken?
+            **Current solution has been to combine server/client into one src dir**

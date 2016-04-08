@@ -9,7 +9,7 @@ module.exports = {
   devtool: '#cheap-module-source-map',
   entry: [
     'webpack-hot-middleware/client',
-    './client/main.js'
+    './src/main.js'
   ],
   output: {
     path: __dirname,
@@ -33,12 +33,12 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
-        include: path.join(__dirname, 'client', 'sass')
+        include: path.join(__dirname, 'src', 'sass')
       },
       {
         test: /\.js$/,
         loader: 'babel',
-        include: path.join(__dirname, 'client'),
+        include: path.join(__dirname, 'src'),
         query: {
           "env": {
             "development": {

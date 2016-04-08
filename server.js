@@ -6,6 +6,12 @@ import bodyParser from 'body-parser';
 import colors from 'colors';
 import config from './webpack.config';
 
+// There's a bug with V8's Object.assign
+// that causes SSR to break.
+// See: https://github.com/facebook/react/issues/6451
+Object.assign = null;
+Object.assign = require('object-assign');
+
 // Stores all script arguments to an object
 // e.g. 'npm start -- arg1' becomes: { arg1: true }
 const getArgs = () => process.argv.reduce((result, arg) => {
@@ -35,7 +41,7 @@ const reconfigureForEmbeddedSass = config => {
 
 // Returns a completed page with or without SSR
 const getRenderHandler = config => (req, res, next) => {
-  const serverRender = require('./client/server-render');
+  const serverRender = require('./src/server-render');
   config.nossr ?
     serverRender.renderTemplateOnly(req, config, (err, page) => {
       if (err) return next(err);
@@ -56,7 +62,8 @@ const createApp = (args, compiler) => {
   app.use(bodyParser.urlencoded({ extended: true }));
 
   // Serve static content (images, etc)
-  app.use(express.static('server/static'));
+  //app.use(express.static('server/static'));
+  app.use(express.static('static'));
 
   // Serve app bundle to client
   app.use(require('webpack-dev-middleware')(compiler, {
@@ -67,7 +74,8 @@ const createApp = (args, compiler) => {
   app.use(require('webpack-hot-middleware')(compiler));
 
   // Get server-side-only routes
-  app.use((req, res, next) => require('./server/app')(req, res, next));
+  //app.use((req, res, next) => require('./server/app')(req, res, next));
+  app.use((req, res, next) => require('./src/server/app')(req, res, next));
 
   // All other routes gets passed to the client app's server rendering
   app.get('*', getRenderHandler(args));
@@ -81,19 +89,21 @@ const createApp = (args, compiler) => {
 const handleModuleReloading = (cb = () => {}) => {
   // Do hot-reloading of express server-side modules
   // (Ensure there's no important state in there!)
-  const watcher = chokidar.watch(['./server']);
+  //const watcher = chokidar.watch(['./server']);
+  /*const watcher = chokidar.watch(['./client']);
   watcher.on('ready', () =>
     watcher.on('all', () => {
       console.log('Clearing /server/ module cache from server'.cyan);
-      decache('server');
+      //decache('server');
+      decache('client');
       cb();
     })
-  );
+  );*/
 
   // Do client-side hot-reloading
   compiler.plugin('done', () => {
-    console.log('Clearing /client/ module cache from server'.cyan);
-    decache('client');
+    console.log('Clearing /src/ module cache from server'.cyan);
+    decache('src');
     cb();
   });
 }

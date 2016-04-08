@@ -4,7 +4,8 @@ const { Provider } = require('react-redux');
 const { renderToString } = require('react-dom/server');
 const { match, RouterContext } = require('react-router');
 const routes = require('./routes.js');
-const postRouter = require('../server/post-router.js'); 
+//const postRouter = require('../server/post-router.js'); 
+const postRouter = require('./server/post-router.js'); 
 
 /* eslint-disable no-sync */
 const template = fs.readFileSync(__dirname + '/../index.html', 'utf8');
@@ -37,17 +38,26 @@ const renderUniversal = (req, config, callback) => {
   const url = req.url;
   const { linkcss, nospa } = config;
   const store = require('./store');
-
-  if (req.method === 'POST') {
-    postRouter(store, req);
-  }
-
   const state = store.getState();
+  const serverProps = (req.method === 'POST') ?
+    { serverPost: req.body } :
+    { 
+      serverGet: {
+        params: req.params,
+        query: req.query
+      }
+    };
 
   match({ routes: routes, location: url }, (err, redirect, props) => { 
+    // TODO: redirect and error handling
     const rendered = renderToString(
       <Provider store={ store }>
-        <RouterContext {...props} />
+        <RouterContext 
+          {...props} 
+          createElement={ (Component, props) => 
+            <Component { ...serverProps } { ...props } />
+          }
+        />
       </Provider>
     );
 
