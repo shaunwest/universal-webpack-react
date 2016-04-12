@@ -17,6 +17,7 @@ module.exports = {
     publicPath: '/'
   },
   plugins: [
+    new webpack.DefinePlugin({ __SERVER__: false }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),

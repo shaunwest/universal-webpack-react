@@ -1,19 +1,18 @@
-const initial = {
-  name: 'bob',
-};
+import { SAVE } from '../actions/user';
 
-const handlers = {
-  SAVE(s, action) {
-    return {
-      name: action.name
-    };
-  }
+const initial = {
+  id: '123',
+  name: 'bob'
 };
 
 export default function user(state = initial, action) {
-  if (handlers[action.type]) {
-    return handlers[action.type](state, action);
+  switch (action.type) {
+    case SAVE:
+      return {
+        id: action.id,
+        name: action.name
+      };
+    default:
+      return state;
   }
-
-  return state;
 };

@@ -6,8 +6,9 @@ import bodyParser from 'body-parser';
 import colors from 'colors';
 import config from './webpack.config';
 
-// There's a bug with V8's Object.assign
-// that causes SSR to break.
+global.__SERVER__ = true;
+
+// Bug with V8's Object.assign causes SSR to break
 // See: https://github.com/facebook/react/issues/6451
 Object.assign = null;
 Object.assign = require('object-assign');
@@ -19,8 +20,8 @@ const getArgs = () => process.argv.reduce((result, arg) => {
   return result;
 }, {});
 
-// Runs through node's require cache and clears files
-// whose paths contain 'matchString'. Those files will
+// Runs through node require cache & removes modules
+// with paths that contain 'matchString'. Those files will
 // be reloaded if they're required again.
 const decache = matchString =>
   Object.keys(require.cache)
@@ -47,7 +48,7 @@ const getRenderHandler = config => (req, res, next) => {
       if (err) return next(err);
       res.send(page);
     }) :
-    serverRender.renderUniversal(req, config, (err, page) => {
+    serverRender.renderUniversal(req, res, config, (err, page) => {
       if (err) return next(err);
       res.send(page);
     });
@@ -59,10 +60,10 @@ const createApp = (args, compiler) => {
   const app = express();
 
   // Handle form body
+  app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 
   // Serve static content (images, etc)
-  //app.use(express.static('server/static'));
   app.use(express.static('static'));
 
   // Serve app bundle to client
@@ -74,7 +75,6 @@ const createApp = (args, compiler) => {
   app.use(require('webpack-hot-middleware')(compiler));
 
   // Get server-side-only routes
-  //app.use((req, res, next) => require('./server/app')(req, res, next));
   app.use((req, res, next) => require('./src/server/app')(req, res, next));
 
   // All other routes gets passed to the client app's server rendering
@@ -87,20 +87,6 @@ const createApp = (args, compiler) => {
 // Setup "hot-reloading" of both client and server modules.
 // Throws away cached modules and re-requires next time.
 const handleModuleReloading = (cb = () => {}) => {
-  // Do hot-reloading of express server-side modules
-  // (Ensure there's no important state in there!)
-  //const watcher = chokidar.watch(['./server']);
-  /*const watcher = chokidar.watch(['./client']);
-  watcher.on('ready', () =>
-    watcher.on('all', () => {
-      console.log('Clearing /server/ module cache from server'.cyan);
-      //decache('server');
-      decache('client');
-      cb();
-    })
-  );*/
-
-  // Do client-side hot-reloading
   compiler.plugin('done', () => {
     console.log('Clearing /src/ module cache from server'.cyan);
     decache('src');
@@ -123,8 +109,7 @@ const startServer = app => {
   return server;
 }
 
-// Display some messaging that indicates what mode
-// we're operating in
+// Display CLI message that indicates operating mode
 const reportArgs = args => {
   const msgs = {
     linkcss: 'External CSS enabled',
@@ -143,7 +128,7 @@ const reportArgs = args => {
 // Banner
 console.log(` UNIVERSAL-WEBPACK-REACT \n`.bgMagenta);
 
-// Get arguments passed to this script
+// Get arguments that were passed to this script
 const args = getArgs();
 reportArgs(args);
 

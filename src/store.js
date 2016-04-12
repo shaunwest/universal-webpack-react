@@ -4,6 +4,8 @@ import promise from 'redux-promise';
 import createLogger from 'redux-logger';
 import rootReducer from './reducers/root';
 
+// export configureStore and store? Require a manual call to configureStore?
+
 const configureStore = initialState => {
   const logger = createLogger();
   const store = createStore(
@@ -18,11 +20,11 @@ const configureStore = initialState => {
 
       store.replaceReducer(nextRootReducer);
     });
-
   }
 
   return store;
-};
+}
 
-const store = configureStore(typeof window !== 'undefined' ? window.initialStoreData : undefined);
+const store = configureStore(__SERVER__ ? undefined : window.initialStoreData);
+
 module.exports = store;

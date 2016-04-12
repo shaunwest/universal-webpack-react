@@ -1,6 +1,8 @@
 TODO
 ====
 
+* Combine renderers into one
+* Populate state from the backend db
 * ~~Think about file structure. Actions/reducers should be shared between client/server, I think...~~
 * What are the differences between all of the devtool source map options?
 * Chunking
@@ -8,6 +10,8 @@ TODO
 * Server-side-only routes should still use the index.html template
 * ~~Mode flags (SSR, no spa, etc)~~
 * Prod build
+* Server stuff: crashing after a db error
+* Webpack errors are too verbose on CLI
 
 ISSUES
 ======

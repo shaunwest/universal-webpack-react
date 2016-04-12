@@ -3,17 +3,20 @@ import { connect } from 'react-redux';
 
 import UserForm from './user-form';
 import { saveUser } from '../actions/user';
+import { syncRemote } from '../actions/sync';
 
 // This is a "Page-level" Component because it has access to the server request
 // It's also a Container/Smart Component because it's connected to the store
 class Profile extends React.Component {
   handleNameChange(name) {
     const { dispatch } = this.props;
-    dispatch(saveUser(name));
+    dispatch(saveUser('123', name));
   }
 
   handleSave(e) {
+    const { dispatch } = this.props;
     e.preventDefault();
+    dispatch(syncRemote());
   }
 
   componentWillMount() {

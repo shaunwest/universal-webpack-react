@@ -10,7 +10,7 @@
 // Proposed:
 // prod     Not sure if this is the right approach...
 
-// Add import/export and some ES7 functionality to node
+// Add import/export and proposed ES7 functionality to node
 require('babel-register')({
   presets: ['es2015', 'stage-0']
 });

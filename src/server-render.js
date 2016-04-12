@@ -1,16 +1,21 @@
-const fs = require('fs');
-const React = require('react');
-const { Provider } = require('react-redux');
-const { renderToString } = require('react-dom/server');
-const { match, RouterContext } = require('react-router');
-const routes = require('./routes.js');
-//const postRouter = require('../server/post-router.js'); 
-const postRouter = require('./server/post-router.js'); 
+import fs from 'fs';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { renderToString } from 'react-dom/server';
+import { match, RouterContext } from 'react-router';
+import routes from './routes.js';
+import requestHandler from './server/request-handler.js'; 
+import { getUser } from './server/db.js';
+
+// TODO: shouldn't this be in the server/ folder?
 
 /* eslint-disable no-sync */
 const template = fs.readFileSync(__dirname + '/../index.html', 'utf8');
 /* eslint-enable no-sync */
 
+// TODO: Maybe just combine these render methods into one
+
+// This is called on every GET and POST request
 const renderTemplateOnly = (req, config, callback) => {
   const url = req.url;
   const { linkcss, nospa } = config;
@@ -34,13 +39,18 @@ const renderTemplateOnly = (req, config, callback) => {
   });
 }
 
-const renderUniversal = (req, config, callback) => {
+  // populate store from db
+  //const getUser = require('./server/db.js');
+  //getUser('123', (err, user) => );
+
+// This is called on every GET and POST request
+const renderUniversal = (req, res, config, callback) => {
   const url = req.url;
   const { linkcss, nospa } = config;
   const store = require('./store');
   const state = store.getState();
   const serverProps = (req.method === 'POST') ?
-    { serverPost: req.body } :
+    { serverPost: req.body } : // what about url parts?
     { 
       serverGet: {
         params: req.params,
@@ -49,14 +59,14 @@ const renderUniversal = (req, config, callback) => {
     };
 
   match({ routes: routes, location: url }, (err, redirect, props) => { 
+    // TODO: get database asynchronously
     // TODO: redirect and error handling
     const rendered = renderToString(
       <Provider store={ store }>
         <RouterContext 
           {...props} 
           createElement={ (Component, props) => 
-            <Component { ...serverProps } { ...props } />
-          }
+            <Component { ...serverProps } { ...props } /> }
         />
       </Provider>
     );
