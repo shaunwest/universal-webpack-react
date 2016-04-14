@@ -6,6 +6,8 @@ import bodyParser from 'body-parser';
 import colors from 'colors';
 import config from './webpack.config';
 
+// A flag that indicates whether code is executing
+// in a server or client context
 global.__SERVER__ = true;
 
 // Bug with V8's Object.assign causes SSR to break
@@ -13,7 +15,11 @@ global.__SERVER__ = true;
 Object.assign = null;
 Object.assign = require('object-assign');
 
-// Stores all script arguments to an object
+// This must be a require and it needs to come after
+// the Object.assign bug fix (needs further investigation)
+const render = require('./src/server/render');
+
+// Assigns all script arguments to an object
 // e.g. 'npm start -- arg1' becomes: { arg1: true }
 const getArgs = () => process.argv.reduce((result, arg) => {
   result[arg] = true;
@@ -40,18 +46,14 @@ const reconfigureForEmbeddedSass = config => {
   return config;
 }
 
-// Returns a completed page with or without SSR
+// Called on every request. Returns a full page.
 const getRenderHandler = config => (req, res, next) => {
-  const serverRender = require('./src/server-render');
-  config.nossr ?
-    serverRender.renderTemplateOnly(req, config, (err, page) => {
-      if (err) return next(err);
-      res.send(page);
-    }) :
-    serverRender.renderUniversal(req, res, config, (err, page) => {
-      if (err) return next(err);
-      res.send(page);
-    });
+  //const serverRender = require('./src/server/render');
+  //serverRender(req, res, config, (err, page) => {
+  render.render(req, res, config, (err, page) => {
+    if (err) return next(err);
+    res.send(page);
+  });
 }
 
 // Initialize express, configure middleware and routes
@@ -86,13 +88,12 @@ const createApp = (args, compiler) => {
 
 // Setup "hot-reloading" of both client and server modules.
 // Throws away cached modules and re-requires next time.
-const handleModuleReloading = (cb = () => {}) => {
+const handleModuleReloading = (cb = () => {}) =>
   compiler.plugin('done', () => {
     console.log('Clearing /src/ module cache from server'.cyan);
     decache('src');
     cb();
   });
-}
 
 // Listen for connections
 const startServer = app => {
@@ -143,4 +144,6 @@ const compiler = webpack(config);
 // Create the app, enable module reloading, and start the server
 const app = createApp(args, compiler);
 handleModuleReloading();
-startServer(app);
+
+// Do any initializations then start
+render.initialize(() => startServer(app));

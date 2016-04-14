@@ -1,10 +1,7 @@
 import React from 'react';
-import { Route, IndexRoute, Router } from 'react-router';
-//import { Provider } from 'react-redux';
+import { Route, IndexRoute } from 'react-router';
 
-//import store from './store.js';
-
-import App from './components/app.js';
+import App from './components/app';
 import Home from './components/home';
 import Counter from './components/counter';
 import Profile from './components/profile';

@@ -6,11 +6,12 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import store from './store.js';
+//import store from './store';
+import configureStore from './store';
 import routes from './routes';
-//import routes from './routes-container';
 import styles from './sass/main.scss';
 
+const store = configureStore(window.initialStoreData); 
 const history = syncHistoryWithStore(browserHistory, store);
 
 window.dev = { store };

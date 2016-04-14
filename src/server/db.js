@@ -1,7 +1,20 @@
-//import SimpleDb from 'simple-node-db';
-const SimpleDb = (__SERVER__) ? require('simple-node-db') : null;
+import SimpleDb from 'simple-node-db';
 
-const db = (SimpleDb) ? new SimpleDb() : {};
+let db;
+
+export const populateDatabase = cb => {
+  console.log('populating db!');  
+  replaceUser({
+    id: '123',
+    name: 'John' 
+  }, cb);
+}
+
+export const open = () => {
+  db = new SimpleDb('.demodb');
+}
+
+export const close = () => db.close(() => console.log('closed db'));
 
 export const addUser = (user, cb) => {
   const key = db.createDomainKey('user', user.id);
@@ -13,10 +26,13 @@ export const updateUser = (user, cb) => {
   db.update(key, user, cb);
 }
 
+// FIXME: what if the id changed?
 export const replaceUser = (user, cb) => {
+  console.log('looking for', user);
   getUser(user.id, (err, foundUser) => {
+    console.log('found user', foundUser);
     if (foundUser) {
-      updateUser(foundUser, cb);
+      updateUser(user, cb);
     } else {
       addUser(user, cb);
     }
