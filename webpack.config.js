@@ -5,7 +5,22 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
-module.exports = function () {
+function configPlugins(embedcss) {
+  var plugins = [
+    new webpack.DefinePlugin({ __SERVER__: false }),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ];
+  
+  if (embedcss) {
+    plugins.push(new ExtractTextPlugin('main.dev.css'));
+  }
+
+  return plugins;
+}
+
+module.exports = function (args) {
   return {
     devtool: '#cheap-module-source-map',
     entry: [
@@ -17,13 +32,7 @@ module.exports = function () {
       filename: 'bundle.dev.js',
       publicPath: '/'
     },
-    plugins: [
-      new webpack.DefinePlugin({ __SERVER__: false }),
-      new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin(),
-      new ExtractTextPlugin('main.dev.css')
-    ],
+    plugins: configPlugins(args.embedcss),
     resolve: {
       extensions: ['', '.js'],
       alias: {
@@ -34,7 +43,8 @@ module.exports = function () {
       loaders: [
         {
           test: /\.scss$/,
-          loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
+          loader: (args.embedcss) ? null : ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
+          loaders: (args.embedcss) ? ['style-loader', 'css-loader', 'sass-loader'] : null,
           include: path.join(__dirname, 'src', 'sass')
         },
         {

@@ -37,14 +37,6 @@ const decache = matchString =>
     })
     .forEach(id => console.log(`decaching ${ id }`));
 
-// FIXME: This needs to be way more robust
-const reconfigureForEmbeddedSass = config => {
-  config.plugins.pop();
-  config.module.loaders[0].loader = undefined;
-  config.module.loaders[0].loaders = ['style-loader', 'css-loader', 'sass-loader'];
-  return config;
-}
-
 // Called on every request. Returns a full page.
 const getRenderHandler = config => (req, res, next) => {
   render.render(req, res, config, (err, page) => {
@@ -140,12 +132,7 @@ const makeConfig = args.prod ?
   require('./webpack.config.js');
 
 // Build the config
-const config = makeConfig();
-
-// If not linking external css, webpack config needs to be modified
-//if (!args.prod || !args.linkcss) {
-//  reconfigureForEmbeddedSass(config);
-//}
+const config = makeConfig(args);
 
 // Create a webpack compiler based on the webpack config file
 const compiler = webpack(config);
