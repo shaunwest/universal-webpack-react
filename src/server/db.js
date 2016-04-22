@@ -3,7 +3,6 @@ import SimpleDb from 'simple-node-db';
 let db;
 
 export const populateDatabase = cb => {
-  console.log('populating db!');  
   replaceUser({
     id: '123',
     name: 'John' 
@@ -14,7 +13,7 @@ export const open = () => {
   db = new SimpleDb('.demodb');
 }
 
-export const close = () => db.close(() => console.log('closed db'));
+export const close = () => db.close();
 
 export const addUser = (user, cb) => {
   const key = db.createDomainKey('user', user.id);
@@ -28,9 +27,7 @@ export const updateUser = (user, cb) => {
 
 // FIXME: what if the id changed?
 export const replaceUser = (user, cb) => {
-  console.log('looking for', user);
   getUser(user.id, (err, foundUser) => {
-    console.log('found user', foundUser);
     if (foundUser) {
       updateUser(user, cb);
     } else {

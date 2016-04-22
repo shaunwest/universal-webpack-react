@@ -1,0 +1,13 @@
+body {
+  font-family: arial;
+  background: #ededed; }
+
+.box {
+  padding: 10px; }
+
+.increment {
+  color: white;
+  cursor: pointer;
+  border: 1px solid green;
+  border-radius: 3px;
+  background-color: green; }

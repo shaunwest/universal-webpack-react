@@ -4,7 +4,6 @@ import http from 'http';
 import webpack from 'webpack';
 import bodyParser from 'body-parser';
 import colors from 'colors';
-import config from './webpack.config';
 
 // A flag that indicates whether code is executing
 // in a server or client context
@@ -48,8 +47,6 @@ const reconfigureForEmbeddedSass = config => {
 
 // Called on every request. Returns a full page.
 const getRenderHandler = config => (req, res, next) => {
-  //const serverRender = require('./src/server/render');
-  //serverRender(req, res, config, (err, page) => {
   render.render(req, res, config, (err, page) => {
     if (err) return next(err);
     res.send(page);
@@ -66,15 +63,18 @@ const createApp = (args, compiler) => {
   app.use(bodyParser.urlencoded({ extended: true }));
 
   // Serve static content (images, etc)
+  // Note: static files are server from '/' (not /static)
   app.use(express.static('static'));
 
-  // Serve app bundle to client
-  app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true, publicPath: config.output.publicPath
-  }));
+  if (!args.prod) {
+    // Serve app bundle to client
+    app.use(require('webpack-dev-middleware')(compiler, {
+      noInfo: true, publicPath: config.output.publicPath
+    }));
 
-  // Include hot module-reloading with the app bundle
-  app.use(require('webpack-hot-middleware')(compiler));
+    // Include hot module-reloading with the app bundle
+    app.use(require('webpack-hot-middleware')(compiler));
+  }
 
   // Get server-side-only routes
   app.use((req, res, next) => require('./src/server/app')(req, res, next));
@@ -88,7 +88,7 @@ const createApp = (args, compiler) => {
 
 // Setup "hot-reloading" of both client and server modules.
 // Throws away cached modules and re-requires next time.
-const handleModuleReloading = (cb = () => {}) =>
+const handleModuleReloading = (compiler, cb = () => {}) =>
   compiler.plugin('done', () => {
     console.log('Clearing /src/ module cache from server'.cyan);
     decache('src');
@@ -113,9 +113,10 @@ const startServer = app => {
 // Display CLI message that indicates operating mode
 const reportArgs = args => {
   const msgs = {
-    linkcss: 'External CSS enabled',
+    embedcss: 'Embed CSS enabled',
     nospa: 'SPA disabled',
-    nossr: 'Server-side rendering disabled'
+    nossr: 'Server-side rendering disabled',
+    prod: 'Production'
   };
 
   const lines = Object.keys(args)
@@ -133,17 +134,29 @@ console.log(` UNIVERSAL-WEBPACK-REACT \n`.bgMagenta);
 const args = getArgs();
 reportArgs(args);
 
+// Get the webpack config function
+const makeConfig = args.prod ?
+  require('./webpack.config.prod.js') :
+  require('./webpack.config.js');
+
+// Build the config
+const config = makeConfig();
+
 // If not linking external css, webpack config needs to be modified
-if (!args.linkcss) {
-  reconfigureForEmbeddedSass(config);
-}
+//if (!args.prod || !args.linkcss) {
+//  reconfigureForEmbeddedSass(config);
+//}
 
 // Create a webpack compiler based on the webpack config file
 const compiler = webpack(config);
 
-// Create the app, enable module reloading, and start the server
-const app = createApp(args, compiler);
-handleModuleReloading();
-
-// Do any initializations then start
-render.initialize(() => startServer(app));
+if (args.prod) {
+  compiler.run((err, stats) => {
+    const app = createApp(args, compiler);
+    render.initialize(() => startServer(app));
+  });
+} else {
+  const app = createApp(args, compiler);
+  handleModuleReloading(compiler);
+  render.initialize(() => startServer(app));
+}

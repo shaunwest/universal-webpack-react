@@ -5,10 +5,8 @@
 //
 // nospa    Disable SPA
 // nossr    Disable server-side rendering
-// linkcss  Link the CSS file externally (rather than embedding it in the js bundle)
-//
-// Proposed:
-// prod     Not sure if this is the right approach...
+// embedcss Embed the CSS file into the js bundle
+// prod     Not sure if this is the right approach
 
 // Add import/export and proposed ES7 functionality to node
 require('babel-register')({
