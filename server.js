@@ -1,9 +1,15 @@
 import express from 'express';
-import chokidar from 'chokidar';
 import http from 'http';
 import webpack from 'webpack';
 import bodyParser from 'body-parser';
 import colors from 'colors';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { renderToString } from 'react-dom/server';
+import { match, RouterContext } from 'react-router';
+import routes from './src/routes.js';
+import { populateDatabase, getUser, open, close } from './src/server/db.js';
+import { start } from './index.js';
 
 // A flag that indicates whether code is executing
 // in a server or client context
@@ -14,10 +20,6 @@ global.__SERVER__ = true;
 Object.assign = null;
 Object.assign = require('object-assign');
 
-// This must be a require and it needs to come after
-// the Object.assign bug fix (needs further investigation)
-const render = require('./src/server/render');
-
 // Assigns all script arguments to an object
 // e.g. 'npm start -- arg1' becomes: { arg1: true }
 const getArgs = () => process.argv.reduce((result, arg) => {
@@ -25,29 +27,9 @@ const getArgs = () => process.argv.reduce((result, arg) => {
   return result;
 }, {});
 
-// Runs through node require cache & removes modules
-// with paths that contain 'matchString'. Those files will
-// be reloaded if they're required again.
-const decache = matchString =>
-  Object.keys(require.cache)
-    .filter(id => new RegExp(`[/\]${ matchString }[/\]`).test(id))
-    .map(id => {
-      delete require.cache[id];
-      return id;
-    })
-    .forEach(id => console.log(`decaching ${ id }`));
-
-// Called on every request. Returns a full page.
-const getRenderHandler = config => (req, res, next) => {
-  render.render(req, res, config, (err, page) => {
-    if (err) return next(err);
-    res.send(page);
-  });
-}
-
 // Initialize express, configure middleware and routes
-const createApp = (args, compiler) => {
-  // Init Express (for serving content)
+const createApp = (args, compiler, getPage) => {
+  // Init Express
   const app = express();
 
   // Handle form body
@@ -72,20 +54,11 @@ const createApp = (args, compiler) => {
   app.use((req, res, next) => require('./src/server/app')(req, res, next));
 
   // All other routes gets passed to the client app's server rendering
-  app.get('*', getRenderHandler(args));
-  app.post('*', getRenderHandler(args));
+  app.get('*', (req, res) => render(req, res, getPage));
+  app.post('*', (req, res) => render(req, res, getPage));
 
   return app;
 }
-
-// Setup "hot-reloading" of both client and server modules.
-// Throws away cached modules and re-requires next time.
-const handleModuleReloading = (compiler, cb = () => {}) =>
-  compiler.plugin('done', () => {
-    console.log('Clearing /src/ module cache from server'.cyan);
-    decache('src');
-    cb();
-  });
 
 // Listen for connections
 const startServer = app => {
@@ -102,29 +75,62 @@ const startServer = app => {
   return server;
 }
 
-// Display CLI message that indicates operating mode
-const reportArgs = args => {
-  const msgs = {
-    embedcss: 'Embed CSS enabled',
-    nospa: 'SPA disabled',
-    nossr: 'Server-side rendering disabled',
-    prod: 'Production'
-  };
+const getServerProps = req =>
+  (req.method === 'POST') ?
+    { serverPost: req.body } : // what about url parts?
+    { 
+      serverGet: {
+        params: req.params,
+        query: req.query
+      }
+    };
 
-  const lines = Object.keys(args)
-    .filter(arg => msgs[arg]) 
-    .map(arg => `* ${ msgs[arg] }`);
-
-  if (lines.length)
-    console.log(lines.join('\n').magenta + '\n');
+const initialize = cb => {
+  open();
+  populateDatabase(() => {
+    cb();
+    close();
+  });
 }
 
+const renderReactString = (store, props, serverProps) =>
+  renderToString(
+    <Provider store={ store }>
+      <RouterContext 
+        {...props} 
+        createElement={ (Component, props) => 
+          <Component { ...serverProps } { ...props } /> }
+      />
+    </Provider>
+  );
+
+const render = (req, res, getPage) =>
+  match({ routes, location: req.url }, (err, redirect, props) => { 
+    if (err) {
+      res.status(500).send(err.message);
+    } else if (redirect) {
+      res.redirect(302, redirect.pathname + redirect.search);
+    } else if (props) {
+      const configureStore = require('./src/store');
+      open();
+      getUser('123', (err, user) => {
+        const store = configureStore({ user });
+        const state = store.getState();
+        const serverProps = getServerProps(req);
+        res.send(getPage(state, () => 
+          renderReactString(store, props, serverProps)));
+        close();
+      });
+    } else {
+      res.status(404).send('Not found');
+    }
+  });
+
 // Banner
-console.log(` UNIVERSAL-WEBPACK-REACT \n`.bgMagenta);
+console.log(` BLUESTONE DEMO \n`.black.bgCyan);
 
 // Get arguments that were passed to this script
 const args = getArgs();
-reportArgs(args);
 
 // Get the webpack config function
 const makeConfig = args.prod ?
@@ -134,16 +140,19 @@ const makeConfig = args.prod ?
 // Build the config
 const config = makeConfig(args);
 
-// Create a webpack compiler based on the webpack config file
-const compiler = webpack(config);
-
-if (args.prod) {
-  compiler.run((err, stats) => {
-    const app = createApp(args, compiler);
-    render.initialize(() => startServer(app));
-  });
-} else {
-  const app = createApp(args, compiler);
-  handleModuleReloading(compiler);
-  render.initialize(() => startServer(app));
-}
+start(
+  config, 
+  {
+    nospa: args.nospa,
+    nossr: args.nossr,
+    embedcss: args.embedcss,
+    prod: args.prod,
+    indexPath: 'index.html',
+    debug: true
+  },
+  (compiler, getPage, report) => {
+    console.log(report);
+    const app = createApp(args, compiler, getPage);
+    initialize(() => startServer(app));
+  }
+);
