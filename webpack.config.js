@@ -13,7 +13,7 @@ function configPlugins(embedcss) {
     new webpack.NoErrorsPlugin()
   ];
   
-  if (embedcss) {
+  if (!embedcss) {
     plugins.push(new ExtractTextPlugin('main.dev.css'));
   }
 
@@ -43,8 +43,8 @@ module.exports = function (args) {
       loaders: [
         {
           test: /\.scss$/,
-          loader: (args.embedcss) ? null : ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
-          loaders: (args.embedcss) ? ['style-loader', 'css-loader', 'sass-loader'] : null,
+          loader: (args.embedcss) ? undefined : ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
+          loaders: (args.embedcss) ? ['style-loader', 'css-loader', 'sass-loader'] : undefined,
           include: path.join(__dirname, 'src', 'sass')
         },
         {

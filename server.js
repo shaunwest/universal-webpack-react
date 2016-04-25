@@ -37,6 +37,15 @@ const decache = matchString =>
     })
     .forEach(id => console.log(`decaching ${ id }`));
 
+// FIXME: This needs to be way more robust
+/*const reconfigureForEmbeddedSass = config => {
+  config.plugins.pop();
+  config.module.loaders[0].loader = undefined;
+  config.module.loaders[0].loaders = ['style-loader', 'css-loader', 'sass-loader'];
+  return config;
+}
+*/
+
 // Called on every request. Returns a full page.
 const getRenderHandler = config => (req, res, next) => {
   render.render(req, res, config, (err, page) => {
