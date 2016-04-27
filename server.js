@@ -9,7 +9,7 @@ import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import routes from './src/routes.js';
 import { populateDatabase, getUser, open, close } from './src/server/db.js';
-import { start } from './index.js';
+import { start } from './ssr.js';
 
 // A flag that indicates whether code is executing
 // in a server or client context
@@ -127,7 +127,7 @@ const render = (req, res, getPage) =>
   });
 
 // Banner
-console.log(` BLUESTONE DEMO \n`.black.bgCyan);
+console.log(` SSR DEMO \n`.black.bgGreen);
 
 // Get arguments that were passed to this script
 const args = getArgs();
