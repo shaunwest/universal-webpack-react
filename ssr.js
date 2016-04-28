@@ -78,7 +78,7 @@ const createPageRender = props => {
 
   return (state, renderCb) =>
     template
-      .replace('<!-- CONTENT -->', props.nossr && renderCb ? '' : renderCb(props))
+      .replace('<!-- CONTENT -->', props.nossr || !renderCb ? '' : renderCb(props))
       .replace('"-- MODE_COLOR --"', modes[mode].color)
       .replace('<!-- MODE -->', modes[mode].label)
       .replace('"-- STORES --"', state ? JSON.stringify(state) : '')
